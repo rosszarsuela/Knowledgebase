@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"     
+     xsi:schemaLocation="
+		     http://www.springframework.org/schema/beans 
+		     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd     
+			 http://www.directwebremoting.org/schema/spring-dwr 
+			 http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd">
+	
+ 
+    <dwr:configuration />
+    <dwr:controller id="dwrController" debug="true" >
+        <dwr:config-param name="pollAndCometEnabled" value="true"/>
+        <dwr:config-param name="activeReverseAjaxEnabled" value="true"/> 
+    </dwr:controller>
+   
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="alwaysUseFullPath" value="true"/>
+        <property name="mappings">
+            <props>
+                <prop key="/dwr/**/*">dwrController</prop>
+            </props>
+        </property>
+    </bean>  
+    <dwr:annotation-scan base-package="com.oris" scanDataTransferObject="true" scanRemoteProxy="true"/>
+   
+    <bean id="misDWRService" class="com.oris.dwr.MISDWRService"/>
+    <bean id="productDWRService" class="com.oris.dwr.ProductDWRService"/>
+    
+    <!-- <bean id="scheduledTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+        <property name="delay" value="7200000" />
+        <property name="period" value="7200000" />
+        <property name="delay" value="10" />
+        <property name="period" value="10" />
+        <property name="timerTask" ref="dwrService" />
+        
+    </bean> -->
+	
+    <!-- <bean id="timerFactory" class="org.springframework.scheduling.timer.TimerFactoryBean" destroy-method="destroy">
+        <property name="scheduledTimerTasks">
+            <list>
+                <ref bean="scheduledTask" />
+            </list>
+        </property>
+    </bean> -->
+</beans>

@@ -1,0 +1,159 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@include file="../common/taglibs.jsp" %>
+
+<script type="text/javascript" src="<c:url value="/js/mis/forms/doctorCmsValidation.js"/>"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		var valid_ext = /(jpg|jpeg|png)$/;
+
+		$('#image').change(function() {
+			var file = $(this)[0].files[0].name.split('.').pop();
+
+			if (file) {
+				if (!valid_ext.test(file)) {
+					alert('Invalid file format. Please upload file extension .png/.jpg/.jpeg');
+					$(this).val('');
+				}
+			}
+		});
+
+		function checkFileSize() {
+			var size = 0;
+
+			$('.file').each(function(index) {
+				if ($(this)[0].files[0]) {
+					size += $(this)[0].files[0].size;
+				}
+			});
+			return size;
+		}
+		
+		/* $("#address").keypress(function(event) {
+	       if (event.which == 13) {        
+	    	   event.preventDefault();
+	       }
+		}); */
+	});
+</script>
+
+<style>
+	div.center{
+			margin-right:-20%;
+			margin-left: 80%;
+		}
+</style>
+
+
+
+<div id="page-wrapper">
+			<!-- Header -->
+			<div id="header">
+				<!-- Logo -->
+				<h3>
+					<a href="<c:url value="/web/home"/>" id="logo">
+					<font face="Arial"><b>ORIS Oral Implant Solutions Inc</b></font></a>
+				</h3><br>
+				<%@include file="../mis/misNav.jsp"%>
+			</div>
+</div>
+			
+<form:form id="doctor_form" enctype="multipart/form-data" action="/Oris/web/secured/admin/doctor/registration" method="post" commandName="doctorCommand">
+	<div class="container">
+		<div class="col-lg-10 col-lg-offset-1">
+			<c:choose>
+				<c:when test="${not empty doctorCommand.id}">
+					<div class="page-header">
+						<h2>
+							<font face="Arial"><b>DOCTOR PROFILE</b></font>
+						</h2>
+					</div>
+					<form:hidden path="id" />
+					<form:hidden path="picture" />
+					<form:hidden path="contentType" />
+					<form:hidden path="createdDate" />
+					<form:hidden path="createdBy.username" />
+				</c:when>
+				<c:otherwise>
+					<div class="page-header">
+					<h2>
+						<font face="Arial"><b>REGISTER DOCTOR PROFILE</b></font>
+					</h2>
+					</div>
+				</c:otherwise>
+			</c:choose>
+			
+			<c:if test="${not empty doctorCommand.id}">
+				<div class="form-group">
+			        <div class="row">
+			             <div class="col-md-6 col-xs-6 col-sm-6">
+			                <div class="center">
+			                <c:choose>
+								<c:when test="${empty doctorCommand.contentType}">
+									<img class="img-responsive" src="<c:url value="/images/no_image_available.jpg"/>" />
+								</c:when>
+								<c:otherwise>
+									<img class="img-responsive" src="<c:url value="${doctorCommand.imageContent}"/>" />
+								</c:otherwise>
+							</c:choose>
+							</div>
+			            </div>
+			        </div>
+			    </div>
+			</c:if>
+			
+		<div class="form-group control-label">
+					<label class="control-label">Image</label>
+		    			<input type="file" class="filestyle" id="image" name="image" data-buttonName="btn-primary" />
+	   	</div>
+		   
+		    <div class="form-group control-label">
+					<label class="control-label">First Name</label>
+					<form:input path="firstName" cssClass="form-control"/>
+			</div>
+						
+			<div class="form-group control-label">
+					<label class="control-label">Middle Name</label>
+					<form:input path="middleName" cssClass="form-control"/>
+			</div>
+		     
+		     <div class="form-group control-label">
+					<label class="control-label">Last Name</label>
+					<form:input path="lastName" cssClass="form-control"/>
+			</div>
+			
+			<div class="form-group control-label">
+					<label class="control-label">Profession</label>
+	      			<form:input path="profession" cssClass="form-control"></form:input>
+			</div>
+		            
+			<div class="form-group control-label">
+					<label class="control-label">Schools</label>
+	      			<form:textarea path="address" cssClass="form-control" rows="5"></form:textarea>
+			</div>
+			
+    	   <div class="form-group control-label">
+					<label class="control-label">Contact No.</label>
+					<form:input path="contactNo" cssClass="form-control" maxlength="11"/>
+			</div>
+	    	  	
+    	   <div class="form-group control-label">
+					<label class="control-label">Email</label>
+					<form:input path="email" cssClass="form-control"/>
+			</div>
+	    	
+			<div class="form-group control-label">
+		      		<label class="control-label">Status</label>
+		      		<form:select path="status" items="${status}" cssClass="form-control" /><br>
+		   </div>
+			
+		   	      	
+	    	<div class="form-group">
+				 <div class="control-label">
+					<button type="submit" class="btn btn-primary btn-md">Submit</button>
+				</div>
+	   		</div>
+		</div>
+	</div>
+</form:form>
+<br><br><br>

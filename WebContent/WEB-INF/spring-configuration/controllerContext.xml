@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <!-- SMPT -->
+	<bean id="mailMessageService" class="com.oris.util.email.SimpleSmtpMessageService"> 
+		<property name="config">
+			<bean class="com.oris.util.email.SimpleSmtpServiceConfig" >
+				<property name="protocol" value="${mail.protocol}"/>
+				<property name="host" value="${mail.host}"/>
+				<property name="port" value="${mail.port}"/>
+				<property name="username" value="${mail.username}"/>
+				<property name="password" value="${mail.password}"/>
+				<property name="sslEnable" value="${mail.ssl}"/>
+				<property name="reqsAuth" value="${mail.auth}"/>
+				<property name="startTls" value="${mail.starttls}"/>
+			</bean>
+		</property>
+	</bean>
+	
+     <!-- MIS -->
+     <!-- START -->
+    <!-- <bean id="userRegistrationValidator" class="com.oris.mis.validator.UserRegistrationValidator" /> -->
+     <!-- END -->
+     
+     <!-- PROVIDER -->
+     <!-- <bean id="doctorValidator" class="com.oris.provider.validators.DoctorValidator" /> -->
+     <!-- START -->
+     
+     <!-- END -->
+     
+     <!-- MARKETING -->
+     <!-- START -->
+    <!-- <bean id="accountSourceValidator" class="com.oris.marketing.validators.AccountSourceValidator" /> 
+     <bean id="prospectAccountValidator" class="com.oris.marketing.validators.ProspectAccountValidator" />
+     <bean id="socValidator" class="com.oris.marketing.validators.SOCValidator" />
+     <bean id="renewalAnalysisValidator" class="com.oris.marketing.validators.RenewalAnalysisValidator" /> -->
+     <!-- END -->
+     
+     <!-- ADMIN -->
+     <!-- START -->
+     <!-- <bean id="enrollmentValidator" class="com.oris.admin.validators.MemberEnrollmentValidator" /> -->
+     
+     <!-- END -->
+     
+     <!-- HOTLINE -->
+     <!-- START -->
+     
+     <!-- END -->
+     
+     <!-- CLAIMS -->
+     <!-- START -->
+     
+     <!-- END -->
+     
+     <!-- BILLBACK -->
+     <!-- START -->
+     
+     <!-- END -->
+     
+     <!-- COLLECTION AND CREDITING -->
+     <!-- START -->
+     
+     <!-- END -->
+     
+     <!-- HEALTH ASSIST -->
+     <!-- START -->
+     
+     <!-- END -->
+     
+     <!-- REPORTS -->
+     <!-- START -->
+     
+     <!-- END -->
+</beans>

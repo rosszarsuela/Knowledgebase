@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <!-- Main Template -->
+    <definition name="layout" template="/WEB-INF/view/common/layout.jsp">
+        <put-attribute name="title" value="Oris Web System" />
+        <put-attribute name="body" value="" />
+    </definition>    
+    
+    <!-- General Pages -->
+    <definition name="loginPage" extends="layout">
+        <put-attribute name="title" value="Home"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/login.jsp"/>
+    </definition>
+    
+    <definition name="homePage" extends="layout">
+        <put-attribute name="title" value="Home"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/home.jsp"/>
+    </definition>
+    
+    <definition name="dashboardPage" extends="layout">
+        <put-attribute name="title" value="Dashboard"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/dashboard.jsp"/>
+    </definition>
+	
+	<definition name="aboutPage" extends="layout">
+        <put-attribute name="title" value="About Us"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/about.jsp"/>
+    </definition>
+    
+    <definition name="portfolioPage" extends="layout">
+        <put-attribute name="title" value="Portfolio"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/portfolio.jsp"/>
+    </definition>
+    
+    <definition name="viewCommonDoctors" extends="layout">
+        <put-attribute name="title" value="Doctors"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/viewDoctors.jsp"/>
+    </definition>
+    
+    <definition name="viewCommonEvents" extends="layout">
+        <put-attribute name="title" value="Events"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/viewEvents.jsp"/>
+    </definition>
+    
+     <definition name="viewCommonEventsInfo" extends="layout">
+    	<put-attribute name="title"	value="Events Info"/>
+    	<put-attribute name="body" value="/WEB-INF/view/common/eventInfo.jsp"/>
+    </definition>
+    
+    
+     <definition name="viewCommonSolutions" extends="layout">
+    	<put-attribute name="title"	value="Events Info"/>
+    	<put-attribute name="body" value="/WEB-INF/view/common/viewSolutions.jsp"/>
+    </definition>
+    
+    <definition name="eventRegistration" extends="layout">
+    	<put-attribute name="title" value="Event Registration"/>
+    	<put-attribute name="body" value="WEB-INF/view/common/eventRegistration.jsp"/>
+    </definition>
+    
+    
+    <definition name="viewCommonPortfolio" extends="layout">
+        <put-attribute name="title" value="Products and Services"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/viewProducts.jsp"/>
+    </definition>
+    
+    <definition name="viewPortfolioInfo" extends="layout">
+        <put-attribute name="title" value="Products and Services"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/productInfo.jsp"/>
+    </definition>
+    
+    <definition name="contactPage" extends="layout">
+        <put-attribute name="title" value="Contact Us"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/contact.jsp"/>
+    </definition>
+    
+    <definition name="exceptionPage" extends="layout">
+        <put-attribute name="title" value="Whoops!"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/generalErrorPage.jsp"/>
+    </definition>
+    
+   	<definition name="forgotPasswordPage" extends="layout">
+        <put-attribute name="title" value="Forgot Password"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/forgotPassword.jsp"/>
+    </definition>
+    
+    <definition name="printMatrix" template="/WEB-INF/view/common/printMatrix.jsp" />
+    
+    <!-- ******************************** MIS *********************************** -->    
+    <!-- User Maintenance -->
+    <definition name="userProfile" extends="layout">
+        <put-attribute name="title" value="User Profile"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/userProfile.jsp"/>
+    </definition>
+    
+    <definition name="viewUsers" extends="layout">
+        <put-attribute name="title" value="View Users"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/viewUsers.jsp"/>
+    </definition>
+    
+    <definition name="doctorProfile" extends="layout">
+        <put-attribute name="title" value="Doctor Profile"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/doctorProfile.jsp"/>
+    </definition>
+    
+    <definition name="viewDoctors" extends="layout">
+        <put-attribute name="title" value="View Doctors"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/viewDoctors.jsp"/>
+    </definition>
+    
+    <definition name="customerProfile" extends="layout">
+        <put-attribute name="title" value="Customer Profile"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/customerProfile.jsp"/>
+    </definition>
+    
+    <definition name="viewCustomers" extends="layout">
+        <put-attribute name="title" value="View Customer"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/viewCustomers.jsp"/>
+    </definition>
+    
+    <definition name="product" extends="layout">
+        <put-attribute name="title" value="Product"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/product.jsp"/>
+    </definition>
+    
+    <definition name="viewProduct" extends="layout">
+        <put-attribute name="title" value="View Producs"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/viewProducts.jsp"/>
+    </definition>
+    
+    <definition name="brand" extends="layout">
+        <put-attribute name="title" value="Brand"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/brand.jsp"/>
+    </definition>
+    
+    <definition name="viewBrands" extends="layout">
+        <put-attribute name="title" value="View Brands"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/viewBrands.jsp"/>
+    </definition>
+    
+    <definition name="solution" extends="layout">
+        <put-attribute name="title" value="Solution"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/solution.jsp"/>
+    </definition>
+    
+    <definition name="viewSolutions" extends="layout">
+        <put-attribute name="title" value="View Solutions"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/viewSolutions.jsp"/>
+    </definition>
+    
+    <definition name="solutionsCategory" extends="layout">
+        <put-attribute name="title" value="Solution's Category"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/solutionsCategory.jsp"/>
+    </definition>
+    
+    <definition name="viewSolutionsCategory" extends="layout">
+        <put-attribute name="title" value="View Solutions"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/viewSolutionsCategory.jsp"/>
+    </definition>
+    
+    <definition name="event" extends="layout">
+        <put-attribute name="title" value="Events"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/event.jsp"/>
+    </definition>
+    
+    <definition name="viewEvents" extends="layout">
+        <put-attribute name="title" value="View Events"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/viewEvents.jsp"/>
+    </definition>
+    
+    <definition name="videos" extends="layout">
+        <put-attribute name="title" value="Video Links"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/videos.jsp"/>
+    </definition>
+    
+</tiles-definitions>
+

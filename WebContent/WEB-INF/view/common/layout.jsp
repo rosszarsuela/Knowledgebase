@@ -27,15 +27,15 @@
         <script type="text/javascript" src="<c:url value="/js/validator.min.js"/>"></script>
         
         <!-- CAROUSEL -->
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         
-		<link rel="stylesheet" href="<c:url value="/css/carousel/bootstrap.min.css"/>">
+		<%-- <link rel="stylesheet" href="<c:url value="/css/carousel/bootstrap.min.css"/>">
 		<link rel="stylesheet" href="<c:url value="/css/carousel/bootstrap-theme.min.css"/>">
 		<script src="<c:url value="/js/carousel/jquery.min.js"/>"></script>
-		<script src="<c:url value="/js/carousel/bootstrap.min.js"/>"></script>
+		<script src="<c:url value="/js/carousel/bootstrap.min.js"/>"></script> --%>
 
 		<%--jQuery Core Library --%>
         <%-- <script type="text/javascript" src="<c:url value="/js/jquery/jquery-1.7.1.min.js"/>"></script> --%>

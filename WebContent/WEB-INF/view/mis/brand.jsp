@@ -76,6 +76,13 @@ $(document).ready(function() {
 	$(":file").filestyle({buttonName: "btn-primary"});
 });
 </script>
+<style>
+	#imgOr {
+	    margin: auto;
+   		width: 30%;
+   		padding-bottom: 9px;
+		}
+</style>
 
 
 <div id="page-wrapper">
@@ -84,7 +91,7 @@ $(document).ready(function() {
 			<!-- Logo -->
 			<h3>
 				<a href="<c:url value="/web/home"/>" id="logo">
-				<font face="Arial"><b>ORIS Oral Implant Solutions Inc</b></font></a>
+				<img class="img-responsive" id ="imgOr" src="<c:url value="/images/oris_logo.png"/>" /></a>
 			</h3><br>
 			<%@include file="../mis/misNav.jsp"%>
 		</div>

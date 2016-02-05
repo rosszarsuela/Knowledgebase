@@ -2,7 +2,7 @@
  * 
  */
 $(document).ready(function() {
-	    $('#doctor_form').formValidation({
+	    $('#consultant_form').formValidation({
 	    	icon: {
 	            valid: 'glyphicon glyphicon-ok',
 	            invalid: 'glyphicon glyphicon-remove',

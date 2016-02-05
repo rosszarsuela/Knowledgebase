@@ -14,6 +14,17 @@
     text-align: center;
 }
 
+	#imgOr {
+	    margin: auto;
+   		width: 30%;
+   		padding-bottom: 9px;
+		}
+		
+		span.row-label {
+		font-size: 17px;
+		}
+		
+
 </style>
 
 <div id="page-wrapper">
@@ -22,7 +33,7 @@
 			<!-- Logo -->
 			<h3>
 				<a href="<c:url value="/web/home"/>" id="logo">
-				<font face="Arial"><b>ORIS Oral Implant Solutions Inc</b></font></a>
+				<img class="img-responsive" id ="imgOr" src="<c:url value="/images/oris_logo.png"/>" /></a>
 			</h3>
 			<%@include file="homeNav.jsp"%>
 		</div>
@@ -63,7 +74,7 @@
 				<div class="rowProducts"><br>
 						<c:choose>
 							<c:when test="${empty product.id and empty product.brand.id and product.category.solution.id ne null}">
-								<div class="rowBoxes">
+								<div class="rowBoxes col-lg-12">
 									<div class="content ">
 										<c:if test="${not empty page.content}">
 											 <div class="row">
@@ -75,9 +86,9 @@
 											   							<c:param name="brand.id" value="${obj.brand.id}"/>
 											   							<c:param name="id" value="${obj.id}"/>
 											   						</c:url>" data-toggle="tooltip" title="${obj.name}"><img class="img-responsive" src="<c:url value="/images/no_image_available.jpg"/>" />
-																	<span class="row-label">
+																	<div class="row-label">
 																		<c:out value="${obj.name}"/>
-																	</span>
+																	</div>
 																</a>
 															</div>
 														</c:when> 
@@ -87,9 +98,9 @@
 											   							<c:param name="brand.id" value="${obj.brand.id}"/>
 											   							<c:param name="id" value="${obj.id}"/>
 											   						</c:url>" data-toggle="tooltip" title="${obj.name}"><img class="img-responsive" src="<c:out value="${obj.imageContent}"/>" />
-																	<span class="row-label">	
+																	<div class="row-label">	
 																		<c:out value="${obj.name}"/>
-																	</span>
+																	</div>
 																</a>
 															</div>
 														</c:otherwise>
@@ -115,9 +126,9 @@
 														<a href="<c:url value="/web/view/portfolio">
 											   							<c:param name="brand.id" value="${obj.id}"/>
 															</c:url>" data-toggle="tooltip" title="${obj.name}"><img class="img-responsive" src="<c:out value="${obj.brandContent}"/>" />
-															<span class="row-label">
+															<div class="row-label">
 																<c:out value="${obj.name}"/>
-															</span>
+															</div>
 														</a>
 													</div>
 												</c:forEach>
@@ -130,7 +141,7 @@
 								<div class="rowBoxes">
 									<div class="content">
 										<c:if test="${not empty page.content}">
-											 <div class="row">
+											 <div class="row"><br>
 												<c:forEach items="${page.content}" var="obj" varStatus="index">									
 													<c:choose>
 													   <c:when test="${empty obj.contentType}">
@@ -139,9 +150,9 @@
 											   							<c:param name="brand.id" value="${obj.brand.id}"/>
 											   							<c:param name="id" value="${obj.id}"/>
 											   						</c:url>" data-toggle="tooltip" title="${obj.name}"><img class="img-responsive" src="<c:url value="/images/no_image_available.jpg"/>" />
-																	<span class="row-label">
+																	<div class="row-label">
 																		<c:out value="${obj.name}"/>
-																	</span>
+																	</div>
 																</a>
 															</div>
 														</c:when> 
@@ -151,9 +162,9 @@
 											   							<c:param name="brand.id" value="${obj.brand.id}"/>
 											   							<c:param name="id" value="${obj.id}"/>
 											   						</c:url>" data-toggle="tooltip" title="${obj.name}"><img class="img-responsive" src="<c:out value="${obj.imageContent}"/>" />
-																	<span class="row-label">
+																	<div class="row-label">
 																		<c:out value="${obj.name}"/>
-																	</span>
+																	</div>
 																</a>
 															</div>
 														</c:otherwise>
@@ -170,6 +181,15 @@
 								</div>
 							</c:when>
 							<c:otherwise>
+							
+						<!-- 	<div class="form-group">			
+								<div class="rowReg">
+									<div class="col-lg-12">
+										<ul id="myTab" class="nav nav-tabs">
+											 <li class="active"><a href="#step-1" data-toggle="tab">Personal information</a></li>
+										</ul>
+									</div>
+									 -->
 								<div class="content product-detail">
 									<div class="page-headerProduct">
 										<img class="img-responsive" src="<c:out value="${product.brand.imageContent}"/>" />
@@ -180,7 +200,7 @@
 							        			<img class="img-responsive" src="<c:out value="${product.imageContent}"/>" />
 							        		</div>
 							        		<br>
-							            	<div class="product-description">
+							            	<div class="product-description" id="step-1">
 							            		<h3><b>Description</b></h3>
 								            	<p class="text-justify" style="white-space: pre-wrap;">${product.description}</p>
 								            	<%-- <c:if test="${empty product.brand.pdfimage}">
@@ -202,6 +222,8 @@
 							            </div>
 								    </div>
 								</div>
+							  </div>
+						<!-- 	</div> -->
 							</c:otherwise>
 						</c:choose>
 					</div>

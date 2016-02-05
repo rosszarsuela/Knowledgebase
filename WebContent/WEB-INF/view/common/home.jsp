@@ -27,6 +27,11 @@
 	 	 margin-top:10px;
 	 	 margin-bottom: 10px;
 		}
+		
+	#imgOr {
+	    margin: auto;
+   		width: 30%;
+		}
 </style>
 
 
@@ -36,7 +41,7 @@
 			<!-- Logo -->
 			<h3>
 				<a href="<c:url value="/web/home"/>" id="logo">
-				<font face="Arial"><b>ORIS Oral Implant Solutions Inc</b></font></a>
+				<img class="img-responsive" id ="imgOr" src="<c:url value="/images/oris_logo.png"/>" />
 			</h3><br>
 			<%@include file="homeNav.jsp"%>
 		</div>

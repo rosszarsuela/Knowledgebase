@@ -112,7 +112,7 @@
 						 </div> 	
 						 <div class="col-lg-10">
 					         	<div class="form-group">
-							        <label class="col-lg-4 control-label">Handheld #</label>
+							        <label class="col-lg-4 control-label">Mobile Phone #</label>
 						        	<div class="col-lg-7">
 						      			<form:input path="contactNo" cssClass="form-control" maxlength="11" />
 						      		</div>

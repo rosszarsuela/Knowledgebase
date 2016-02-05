@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.oris.enums.StatusEnum;
 import com.oris.mis.model.Product;
+import com.oris.mis.model.ProductImages;
 import com.oris.mis.service.MISService;
 
 @RemoteProxy(name="productDWRService")
@@ -29,5 +30,10 @@ public class ProductDWRService {
 	public Product getProductById(Long id) {
 		Product product = misService.get(Product.class, id);
 		return product;
+	}
+	
+	public ProductImages getImageById(Long id) {
+		ProductImages pi = misService.get(ProductImages.class, id);
+		return pi;
 	}
 }

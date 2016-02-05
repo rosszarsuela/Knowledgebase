@@ -23,9 +23,9 @@ import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "doctor")
+@Table(name = "consultant")
 @DataTransferObject(type = "hibernate3")
-public class Doctor implements Serializable {
+public class Consultants implements Serializable {
 
 	private Long id;
 	private String lastName;
@@ -35,7 +35,6 @@ public class Doctor implements Serializable {
 	private String contactNo;
 	private String email;
 	private String profession;
-	private String title;
 	private CommonsMultipartFile image;
 	private String contentType;
 	private byte[] picture;
@@ -55,7 +54,7 @@ public class Doctor implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "DOCTOR_ID_PK")
+	@Column(name = "CONSULTANT_ID_PK")
 	public Long getId() {
 		return id;
 	}
@@ -265,15 +264,6 @@ public class Doctor implements Serializable {
 		this.sortBy = sortBy;
 	}
 	
-	@Column(name = "TITLE")
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	@Transient
 	public String getCompleteName() {
 		return getFirstName() + " " + getMiddleName().substring(0, 1) + ". " + getLastName();

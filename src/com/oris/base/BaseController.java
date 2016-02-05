@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,19 +15,26 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.BaseFont;
+import com.oris.enums.LinksEnum;
 import com.oris.enums.StatusEnum;
+import com.oris.mis.model.Brand;
+import com.oris.mis.model.Doctor;
 import com.oris.mis.model.Users;
+import com.oris.mis.model.dto.ProductsAndServicesMenu;
 import com.oris.mis.service.MISService;
 import com.oris.util.Config;
 import com.oris.util.DateUtility;
 import com.oris.util.InventoryUtility;
+import com.oris.util.Page;
 
 @Controller
 public class BaseController extends BasePDFGenUtil {
@@ -176,5 +184,14 @@ public class BaseController extends BasePDFGenUtil {
 			}
 		}
 		return status;		
+	}
+		
+	@SuppressWarnings("unchecked")
+	@ModelAttribute("educatorList")
+	protected List<Doctor> getDoctorsList() {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("status", StatusEnum.ACTIVE.getId());
+		List<Doctor> doctors = (List<Doctor>)misService.getAllByHashMap(Doctor.class, map);
+		return doctors;
 	}
 }

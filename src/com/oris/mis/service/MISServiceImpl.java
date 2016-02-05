@@ -1,6 +1,9 @@
 package com.oris.mis.service;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,14 +14,18 @@ import org.springframework.stereotype.Service;
 import com.oris.base.BaseServiceImpl;
 import com.oris.mis.dao.MISDao;
 import com.oris.mis.model.Brand;
+import com.oris.mis.model.Client;
+import com.oris.mis.model.Consultants;
 import com.oris.mis.model.Customer;
 import com.oris.mis.model.Doctor;
 import com.oris.mis.model.Event;
 import com.oris.mis.model.Participants;
 import com.oris.mis.model.Product;
+import com.oris.mis.model.ProductImages;
 import com.oris.mis.model.Solution;
 import com.oris.mis.model.SolutionsCategory;
 import com.oris.mis.model.Speaker;
+import com.oris.mis.model.Specifications;
 import com.oris.mis.model.Users;
 import com.oris.mis.model.Videos;
 import com.oris.mis.model.dto.ProductsAndServicesMenu;
@@ -89,8 +96,16 @@ public class MISServiceImpl extends BaseServiceImpl implements MISService{
 
 	@Override
 	public Page viewDoctors(Doctor doctor) {
-		Map<String, Object> map =  misDao.viewDoctors(doctor);		
+		Map<String, Object> map =  misDao.viewDoctors(doctor);
 		Page page = PaginationUtility.getPage((Integer)map.get(KEY_COUNT), getSize(), doctor.getBegin());
+		page.setContent((List<?>)map.get(KEY_LIST));		
+		return page;
+	}
+	
+	@Override
+	public Page viewMentors(Doctor doctor) {
+		Map<String, Object> map =  misDao.viewMentors(doctor);
+		Page page = PaginationUtility.getPage((Integer)map.get(KEY_COUNT), getDoctorSize(), doctor.getBegin());
 		page.setContent((List<?>)map.get(KEY_LIST));		
 		return page;
 	}
@@ -102,6 +117,10 @@ public class MISServiceImpl extends BaseServiceImpl implements MISService{
 
 	@Override
 	public void createProduct(Product product) {
+		List<Specifications> sp = product.getSpecs();
+		List<ProductImages> productImages = product.getProductImages();
+		product.setProductImages(null);
+		product.setSpecs(null);
 		
 		if(InventoryUtility.isNull(product.getCategory().getId())) {
 			product.setCategory(null);
@@ -114,9 +133,50 @@ public class MISServiceImpl extends BaseServiceImpl implements MISService{
 			product.setUpdatedBy(InventoryUtility.getLoginUser());
 			product.setUpdatedDate(new Date());
 		}
-		misDao.save(product);
+		
+		Product p = (Product) misDao.save(product);
+		
+		misDao.deleteObjIn(Specifications.class, null, "product.id", p.getId());
+		
+		for(Specifications specifications : sp) {
+			specifications.setProduct(p);
+			save(specifications);
+		}
+		
+		HashMap<String, Object> update = new HashMap<String, Object>();
+		update.put("isDeleted", true);
+		
+		HashMap<String, Object> condition = new HashMap<String, Object>();
+		condition.put("product.id", p.getId());
+		misDao.bulkUpdate(ProductImages.class, update, condition);
+		
+		if(!InventoryUtility.isNull(productImages) && productImages.size() > 0) {
+			for(ProductImages pImg : productImages) {
+				pImg.setProduct(p);
+				pImg.setCreatedDate(new Date());
+				pImg.setCreatedBy(InventoryUtility.getLoginUser());
+				pImg.setIsDeleted(false);
+				if(!InventoryUtility.isNull(pImg.getPImg()) && pImg.getPImg().getSize() > 0) {
+					byte[] pImage = new byte[(int) pImg.getPImg().getBytes().length];
+					try {
+						InputStream fis = pImg.getPImg().getInputStream();
+						fis.read(pImage);
+						fis.close();
+							pImg.setPImage(pImage);
+							pImg.setContentType(pImg.getPImg().getContentType());
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				} else {
+					ProductImages pi = (ProductImages) get(ProductImages.class, pImg.getId());
+					pImg.setPImage(pi.getPImage());
+				}
+				save(pImg);
+			}
+		}
 	}
-
+	
 	@Override
 	public Page viewProducts(Product product) {
 		Map<String, Object> map =  misDao.viewProduct(product);		
@@ -280,5 +340,41 @@ public class MISServiceImpl extends BaseServiceImpl implements MISService{
 	@Override
 	public Videos getVideo() {
 		return misDao.getVideos();
+	}
+
+	
+	@Override
+	public void consultantRegistration(Consultants consultant) {
+		if(InventoryUtility.isNull(consultant.getId())) {
+			consultant.setCreatedBy(InventoryUtility.getLoginUser());
+			consultant.setCreatedDate(new Date());
+		} else {
+			consultant.setUpdatedBy(InventoryUtility.getLoginUser());
+			consultant.setUpdatedDate(new Date());
+		}
+		misDao.save(consultant);
+	}
+
+	@Override
+	public Page viewConsultant(Consultants consultant) {
+		Map<String, Object> map =  misDao.viewConsultant(consultant);		
+		Page page = PaginationUtility.getPage((Integer)map.get(KEY_COUNT), getSize(), consultant.getBegin());
+		page.setContent((List<?>)map.get(KEY_LIST));		
+		return page;
+	}
+
+	@Override
+	public Client createClient(Client client) {
+		if (InventoryUtility.isNull(client.getId())) {
+			client.setCreatedDate(new Date());
+		}
+		
+		Client obj = (Client) misDao.save(client);
+		return obj;
+	}
+
+	@Override
+	public List<Doctor> getDoctorList() {
+		return misDao.getDoctorList();
 	}
 }

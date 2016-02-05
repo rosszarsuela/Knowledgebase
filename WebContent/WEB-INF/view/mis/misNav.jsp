@@ -47,6 +47,7 @@
 		<li id="training">
 				<li><a href="<c:url value="/web/secured/admin/user/view"/>">USERS</a></li>
 				<li><a href="<c:url value="/web/secured/admin/doctor/view"/>">MENTORS</a></li>
+				<li><a href="<c:url value="/web/secured/admin/consultant/view"/>">CONSULTANTS</a></li>
 				<li><a href="<c:url value="/web/secured/admin/customer/view"/>">CUSTOMER</a></li>
 				<li><a href="<c:url value="/web/secured/admin/solution/view"/>">SOLUTION</a></li>
 				<li><a href="<c:url value="/web/secured/admin/solution/category/view"/>">SOLUTION'S CATEGORY</a></li>
@@ -56,7 +57,7 @@
 				<li><a href="<c:url value="/web/secured/admin/videos/form"/>">VIDEO LINKS</a></li>
 		</li>
 		<li id="logout">
-			<a href="<c:url value="/j_spring_security_logout"/>">LOGOUT</a>			
+		<%-- 	<a href="<c:url value="/j_spring_security_logout"/>">LOGOUT</a>			 --%>
 		</li>
 	</ul>
 </nav>

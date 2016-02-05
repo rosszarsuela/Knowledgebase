@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@include file="../common/taglibs.jsp" %>
 
-<script type="text/javascript" src="<c:url value="/js/mis/forms/doctorCmsValidation.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/mis/forms/consultantCmsValidation.js"/>"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -58,14 +58,14 @@
 			</div>
 </div>
 			
-<form:form id="doctor_form" enctype="multipart/form-data" action="/Oris/web/secured/admin/doctor/registration" method="post" commandName="doctorCommand">
+<form:form id="consultant_form" enctype="multipart/form-data" action="/Oris/web/secured/admin/consultant/registration" method="post" commandName="consultantCommand">
 	<div class="container">
 		<div class="col-lg-10 col-lg-offset-1">
 			<c:choose>
-				<c:when test="${not empty doctorCommand.id}">
+				<c:when test="${not empty consultantCommand.id}">
 					<div class="page-header">
 						<h2>
-							<font face="Arial"><b>DOCTOR PROFILE</b></font>
+							<font face="Arial"><b>CONSULTANT PROFILE</b></font>
 						</h2>
 					</div>
 					<form:hidden path="id" />
@@ -77,23 +77,23 @@
 				<c:otherwise>
 					<div class="page-header">
 					<h2>
-						<font face="Arial"><b>REGISTER DOCTOR PROFILE</b></font>
+						<font face="Arial"><b>REGISTER CONSULTANT PROFILE</b></font>
 					</h2>
 					</div>
 				</c:otherwise>
 			</c:choose>
 			
-			<c:if test="${not empty doctorCommand.id}">
+			<c:if test="${not empty consultantCommand.id}">
 				<div class="form-group">
 			        <div class="row">
 			             <div class="col-md-6 col-xs-6 col-sm-6">
 			                <div class="center">
 			                <c:choose>
-								<c:when test="${empty doctorCommand.contentType}">
+								<c:when test="${empty consultantCommand.contentType}">
 									<img class="img-responsive" src="<c:url value="/images/no_image_available.jpg"/>" />
 								</c:when>
 								<c:otherwise>
-									<img class="img-responsive" src="<c:url value="${doctorCommand.imageContent}"/>" />
+									<img class="img-responsive" src="<c:url value="${consultantCommand.imageContent}"/>" />
 								</c:otherwise>
 							</c:choose>
 							</div>
@@ -125,11 +125,6 @@
 			<div class="form-group control-label">
 					<label class="control-label">Profession</label>
 	      			<form:input path="profession" cssClass="form-control"></form:input>
-			</div>
-			
-			<div class="form-group control-label">
-					<label class="control-label">Titles</label>
-	      			<form:input path="title" cssClass="form-control" placeholder="DMD, MSC"></form:input>
 			</div>
 		            
 			<div class="form-group control-label">

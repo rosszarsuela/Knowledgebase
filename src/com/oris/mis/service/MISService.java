@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.oris.base.BaseService;
 import com.oris.mis.model.Brand;
+import com.oris.mis.model.Client;
+import com.oris.mis.model.Consultants;
 import com.oris.mis.model.Customer;
 import com.oris.mis.model.Doctor;
 import com.oris.mis.model.Event;
@@ -28,6 +30,7 @@ public interface MISService extends BaseService {
 	//Doctor
 	void doctorRegistration(Doctor doctor);
 	Page viewDoctors(Doctor doctor);
+	Page viewMentors(Doctor doctor);
 	boolean isDoctorExists(String param);
 	
 	//Customers
@@ -65,5 +68,15 @@ public interface MISService extends BaseService {
 	//Video Links
 	void createVideo(Videos video);
 	Videos getVideo();
+	
+	//Consultants
+	void consultantRegistration(Consultants consultant);
+	Page viewConsultant(Consultants consultant);
+	
+	//client
+	Client createClient(Client client);
+	
+	//Doctors for Educators
+	List<Doctor> getDoctorList();
 	
 }

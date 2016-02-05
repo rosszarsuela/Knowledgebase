@@ -12,7 +12,10 @@
 				<a href="<c:url value="/web/secured/admin/user/view"/>" id="sub-nav-a">User</a>
 			</li>
 			<li id="sub-nav-list">
-				<a href="<c:url value="/web/secured/admin/doctor/view"/>" id="sub-nav-a">Doctor</a>
+				<a href="<c:url value="/web/secured/admin/doctor/view"/>" id="sub-nav-a">Educators</a>
+			</li>
+			<li id="sub-nav-list">
+				<a href="<c:url value="/web/secured/admin/consultant/view"/>" id="sub-nav-a">Consultants</a>
 			</li>
 			<li id="sub-nav-list">
 				<a href="<c:url value="/web/secured/admin/customer/view"/>" id="sub-nav-a">Customer</a>

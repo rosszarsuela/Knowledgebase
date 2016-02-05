@@ -24,6 +24,8 @@ import com.oris.base.BaseController;
 import com.oris.enums.LinksEnum;
 import com.oris.enums.StatusEnum;
 import com.oris.mis.model.Brand;
+import com.oris.mis.model.Client;
+import com.oris.mis.model.Consultants;
 import com.oris.mis.model.Doctor;
 import com.oris.mis.model.Event;
 import com.oris.mis.model.Participants;
@@ -38,6 +40,7 @@ import com.oris.util.Page;
 import com.oris.util.email.MessageService;
 import com.oris.util.email.SimpleSmtpMessageService;
 import com.oris.util.email.SimpleSmtpServiceConfig;
+import com.oris.util.email.template.ContactMailTemplate;
 import com.oris.util.email.template.EventMailTemplate;
 import com.oris.util.email.template.MessageTemplate;
 
@@ -56,12 +59,16 @@ public class CommonController extends BaseController {
 	
 	//Constant variables
 	private static final String VIEW_DOCTORS = "viewCommonDoctors";
+	private static final String VIEW_CONSULTANTS = "viewCommonConsultants";
 	private static final String VIEW_SOLUTIONS= "viewCommonSolutions";
 	private static final String VIEW_EVENTS = "viewCommonEvents";
 	private static final String VIEW_EVENTS_INFO = "viewCommonEventsInfo";
 	private static final String VIEW_EVENT_REGISTRATION ="/web/view/event/info";
 	private static final String VIEW_PORTFOLIO = "viewCommonPortfolio";
 	private static final String VIEW_PORTFOLIO_INFO = "viewPortfolioInfo";
+	private static final String CONTACT_US = "contactPage";
+	private static final String VIEW_CALL_US = "callUs";
+	private static final String VIEW_LOCATION = "viewLocation";
 	
 
 	@RequestMapping(value="/view/mentors")
@@ -72,13 +79,13 @@ public class CommonController extends BaseController {
 														
 		orderBy = request.getParameter("orderBy")  == null ? "d.lastName" : request.getParameter("orderBy");
 		sortBy = request.getParameter("sortBy") == null ? "ASC" : request.getParameter("sortBy");
-		
+			
 		doctor.setBegin(begin);
 		doctor.setOrderBy(orderBy);
 		doctor.setSortBy(sortBy);
 		doctor.setStatus(StatusEnum.ACTIVE.getId());
 		
-		Page page = misService.viewDoctors(doctor);
+		Page page = misService.viewMentors(doctor);
 
 		model.addAttribute("page", page);
 		model.addAttribute("begin", begin);
@@ -87,6 +94,32 @@ public class CommonController extends BaseController {
 		model.addAttribute("activeMenu", LinksEnum.TRAINING.getId());
 		return VIEW_DOCTORS;
 	}
+	
+	@RequestMapping(value="/view/consultants")
+	public String viewConsultant(HttpServletRequest request, ModelMap model, @ModelAttribute("consultantCommand") final Consultants consultant) {
+		begin = request.getParameter("begin") == null ? 
+				Integer.parseInt(getMessageValue("views.mis.view.begin")) 
+				: Integer.parseInt(request.getParameter("begin"));
+														
+		orderBy = request.getParameter("orderBy")  == null ? "con.lastName" : request.getParameter("orderBy");
+		sortBy = request.getParameter("sortBy") == null ? "ASC" : request.getParameter("sortBy");
+		
+		consultant.setBegin(begin);
+		consultant.setOrderBy(orderBy);
+		consultant.setSortBy(sortBy);
+		consultant.setStatus(StatusEnum.ACTIVE.getId());
+		
+		Page page = misService.viewConsultant(consultant);
+
+		model.addAttribute("page", page);
+		model.addAttribute("begin", begin);
+		model.addAttribute("orderBy", orderBy);
+		model.addAttribute("sortBy", sortBy);
+		model.addAttribute("activeMenu", LinksEnum.TRAINING.getId());
+		return VIEW_CONSULTANTS;
+	}
+	
+	
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/view/solutions")
@@ -222,7 +255,7 @@ public class CommonController extends BaseController {
 				Integer.parseInt(getMessageValue("views.mis.view.begin")) 
 				: Integer.parseInt(request.getParameter("begin"));
 														
-		orderBy = request.getParameter("orderBy")  == null ? "p.name" : request.getParameter("orderBy");
+		orderBy = request.getParameter("orderBy")  == null ? "p.id" : request.getParameter("orderBy");
 		sortBy = request.getParameter("sortBy") == null ? "ASC" : request.getParameter("sortBy");
 				
 		List<ProductsAndServicesMenu> solutionBrandList = misService.getSolutionsBrand();
@@ -317,6 +350,34 @@ public class CommonController extends BaseController {
 	    return null;
 	}
 	
+	@RequestMapping(value="/view/contact/form", method=RequestMethod.GET)
+	public String eventInfo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("sendCommand") final Client client, 
+			ModelMap model) {
+		
+		return "contactForm";
+	}
+	
+	@RequestMapping(value="/view/contact/form/send", method=RequestMethod.POST)
+	public void register(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("sendCommand") final Client client,
+							BindingResult result) throws IOException {
+		
+	
+		Client obj = misService.createClient(client);
+		
+		SimpleSmtpServiceConfig smtpConfig = new SimpleSmtpServiceConfig("smtp", "smtp.gmail.com", 587, "devism41l@gmail.com","devisyakshas01", false, true, true);
+		MessageService mailService = new SimpleSmtpMessageService();
+		mailService.setConfig(smtpConfig);
+		
+		MessageTemplate template = null;
+		
+		String email = Config.getProperties("email.from");
+			
+		template = ContactMailTemplate.newTemplate(email, obj);
+		mailService.sendMessage(template);
+		
+		response.sendRedirect(request.getContextPath() + CONTACT_US);
+	}
+	
 	/*@RequestMapping(value="/view/downloadPdf", method=RequestMethod.GET)
 	public void downloadPdf(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Long id = Long.parseLong(request.getParameter("id"));
@@ -327,4 +388,5 @@ public class CommonController extends BaseController {
 	    response.setHeader("Content-disposition", "attachment; filename="+ fileName+".pdf");
 	    response.getOutputStream().write(product.getManual());
 	}*/
+	
 }

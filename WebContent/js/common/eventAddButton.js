@@ -1,7 +1,3 @@
-/**
- * 
- */
-
 $(document).ready(function() {
 		$('.removeButton').on('click', function() {
 	    	$(this).parents('div.speaker').remove();

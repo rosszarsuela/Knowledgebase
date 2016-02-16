@@ -56,6 +56,10 @@ public class BaseDaoHibernate extends HibernateDaoSupport implements BaseDao {
 	@Autowired
 	private Md5PasswordEncoder md5PasswordEncoder;
 	
+	public Integer getDoctorSize() {
+		return Integer.parseInt(Config.getProperties("mis.doctor.view.size"));
+	}
+	
 	public Integer getSize() {
 		return Integer.parseInt(Config.getProperties("views.mis.view.size"));
 	}

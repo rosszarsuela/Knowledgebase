@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
+import javax.activation.DataSource;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -13,6 +14,7 @@ import javax.mail.Transport;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.util.ByteArrayDataSource;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.StopWatch;
@@ -20,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.oris.util.CollectionsUtil;
+import com.oris.util.InventoryUtility;
 import com.oris.util.email.template.EmailTemplate;
 import com.oris.util.email.template.MessageTemplate;
 
@@ -157,22 +160,21 @@ public class SimpleSmtpMessageService implements MessageService {
             BodyPart msgBody = new MimeBodyPart();
             msgBody.setText(msgTemplate.fetchBody());
             
-//            if (msgTemplate.isHtmlFormat()) {
-//            	msgBody.setContent(msgTemplate.fetchBody(), MailUtil.TEXT_HTML);
-//            } else {
-//            	msgBody.setContent(msgTemplate.fetchBody(), MailUtil.TEXT_PLAIN);
-//            }            
+            if (msgTemplate.isHtmlFormat()) {
+            	msgBody.setContent(msgTemplate.fetchBody(), MailUtil.TEXT_HTML);
+            } else {
+            	msgBody.setContent(msgTemplate.fetchBody(), MailUtil.TEXT_PLAIN);
+            }            
             mp.addBodyPart(msgBody);
             
-            msgBody = new MimeBodyPart();
-            
-//            String filename = "C:\\sample.jpg";
-//            DataSource source = new FileDataSource(filename);
-//            msgBody.setDataHandler(new DataHandler(source));
-            msgBody.setDataHandler(new DataHandler(msgTemplate.getDataSource()));
-            msgBody.setFileName("deposit.jpg");
-            msgBody.setHeader("Content-ID", "image_id");
-            mp.addBodyPart(msgBody);
+            if(!InventoryUtility.isNull(msgTemplate.getPicture())) {
+            	msgBody = new MimeBodyPart();            
+	            DataSource ds = new ByteArrayDataSource(msgTemplate.getPicture(), "application/octet-stream");
+	            msgBody.setDataHandler(new DataHandler(ds));
+	            msgBody.setFileName("deposit.jpg");
+	            msgBody.setHeader("Content-ID", "image_id");
+	            mp.addBodyPart(msgBody);
+            }
             msg.setContent(mp);
             msg.saveChanges();
             

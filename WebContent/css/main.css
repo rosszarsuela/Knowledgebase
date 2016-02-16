@@ -282,6 +282,7 @@
 
 		.container {
 			width: 95% !important;
+			margin-top: 50px;
 		}
 
 	}
@@ -1157,6 +1158,10 @@
 			margin: -30px 0 0 0;
 		}
 
+		.rowEducators {
+			margin: 1px 0 0 0 !important;
+		}
+		
 		.row.uniform > * {
 			padding: 30px 0 0 30px;
 		}
@@ -3945,6 +3950,8 @@
 				font-size: 1.25em;
 				letter-spacing: 0;
 				line-height: 1.35em;
+				margin-top: 5px;
+				padding-top: 20px;
 			}
 
 			h3 {
@@ -4129,7 +4136,7 @@
 			
 		/* Products & Services  */
 			.rowProducts {
-			      margin: 0 !important;
+			      margin: -73px 0 0 -10px !important;
 				  padding: 0 !important;
 				  width: 100%;
 			}
@@ -4206,8 +4213,8 @@
 		input[type="reset"],
 		input[type="button"],
 		.button {
-			width: 50%;
-			display: block;
+			width: 40%%;
+			display: inline;
 		}
 			
 		/* Events */
@@ -4272,7 +4279,7 @@
 			
 			a.button {
 				width: 70%;
-				padding: 0 0 0 0px;
+				padding: 10px 10px 10px 10px;
 			    margin: 0 auto;
 			    font-size: 15px;
 			}
@@ -4490,6 +4497,7 @@
 					line-height: 48px;
 					padding: 0 1em 0 1em;
 					text-decoration: none;
+					overflow:hidden
 				}
 
 					#navPanel .link:first-child {
@@ -4863,8 +4871,8 @@
 		input[type="reset"],
 		input[type="button"],
 		.button {
-			width: 80%;
-			display: block;
+			width: 47%;
+			display: inline;
 		}
 		
 		/* Educators */
@@ -4900,6 +4908,7 @@
 			
 			.event-page-header h2 {
 				margin-bottom: 0em;
+				margin-top: 5px;
 				font-size: 1.4em;
 				width: 100%;
 				padding: 5px 0 !important;
@@ -4943,7 +4952,7 @@
 			}
 			
 			a.button {
-				padding: 0 0 0 0px;
+				padding: 10px 10px 10px 10px;
 			    margin: 0px 0px -12px 35px;
 			    font-size: 15px;
 			}
@@ -5005,8 +5014,8 @@
 		input[type="reset"],
 		input[type="button"],
 		.button {
-			width: 100%;
-			display: block;
+			width: 65%;
+			display: inline;
 		}
 
 	/* Box */
@@ -5315,7 +5324,7 @@
 			}
 			
 			a.button {
-				padding: 0 0 0 0px;
+				padding: 10px 10px 10px 10px;
 			    margin: 0px 0px -12px 35px;
 			    font-size: 15px;
 			}
@@ -5387,8 +5396,8 @@
 		input[type="reset"],
 		input[type="button"],
 		.button {
-			width: 100%;
-			display: block;
+			width: 69%;
+			display: inline;
 		}
 
 	/* Box */

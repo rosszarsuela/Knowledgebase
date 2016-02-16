@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.oris.base.BaseDao;
 import com.oris.mis.model.Brand;
+import com.oris.mis.model.Consultants;
 import com.oris.mis.model.Customer;
 import com.oris.mis.model.Doctor;
 import com.oris.mis.model.Event;
@@ -27,6 +28,7 @@ public interface MISDao extends BaseDao {
 	
 	//Doctor
 	Map<String, Object> viewDoctors(Doctor doctor);
+	Map<String, Object> viewMentors(Doctor doctor);
 	
 	//Customer
 	Map<String, Object> viewCustomers(Customer customer);
@@ -58,4 +60,11 @@ public interface MISDao extends BaseDao {
 	
 	//Video Links
 	Videos getVideos();
+	
+	//Consultant
+	Map<String, Object> viewConsultant(Consultants consultant);
+	
+	//Doctors for Educators
+	List<Doctor> getDoctorList();
+	
 }

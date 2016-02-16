@@ -2,6 +2,7 @@ package com.oris.mis.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -37,11 +39,14 @@ public class Product implements Serializable {
 	private byte[] picture;
 	private CommonsMultipartFile pdf;
 	private byte[] manual;
+	private List<ProductImages> productImages;
 	private Integer status;
 	private Users createdBy;
 	private Date createdDate;
 	private Users updatedBy;
 	private Date updatedDate;
+	private List<Specifications> specs;
+	
 
 	// params
 	private Integer begin;
@@ -49,6 +54,14 @@ public class Product implements Serializable {
 	private Integer endLimit;
 	private String orderBy;
 	private String sortBy;
+	
+	public Product() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Product(Long id) {
+		this.id = id;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -121,7 +134,7 @@ public class Product implements Serializable {
 	public String getImageContent() {
 		return "data:"+getContentType()+";base64," + Base64.encode(getPicture());
 	}
-	
+	 
 	@Transient
 	public String getPdfContent() {
 		return "data:"+getContentType()+";base64," + Base64.encode(getManual());
@@ -135,6 +148,16 @@ public class Product implements Serializable {
 	public void setManual(byte[] manual) {
 		this.manual = manual;
 	}
+	
+	
+	public void setProductImages(List<ProductImages> productImages) {
+		this.productImages = productImages;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = ProductImages.class, mappedBy = "product")
+	public List<ProductImages> getProductImages() {
+		return productImages;
+	}
 
 	@Column(name = "STATUS")
 	public Integer getStatus() {
@@ -144,7 +167,16 @@ public class Product implements Serializable {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	public List<Specifications> getSpecs() {
+		return specs;
+	}
 
+	public void setSpecs(List<Specifications> specs) {
+		this.specs = specs;
+	}
+	
 	@OneToOne(fetch = FetchType.EAGER, targetEntity = Users.class)
 	@JoinColumn(name = "CREATED_BY")
 	public Users getCreatedBy() {

@@ -15,7 +15,18 @@
 		background-size: 100% 6em, 100% 6em, auto;
 		background-repeat: no-repeat, no-repeat, repeat;
 		size: 2px;
-	}
+		}
+		#header{
+		padding:1em 0 0 0 !important;
+		}	
+		#header >h3{
+			margin-bottom: .6em !important;
+		}
+		#imgOr {
+		    margin: auto !important;
+	   		width: 30% !important;
+	   		padding-bottom: 3px !important;
+	   	}
 </style>
     
 <div id="page-wrapper">
@@ -24,10 +35,11 @@
 			<!-- Logo -->
 			<h3>
 				<a href="<c:url value="/web/home"/>" id="logo">
-				<font face="Arial"><b>ORIS Oral Implant Solutions Inc</b></font></a>
+				<img class="img-responsive" id="imgOr" src="<c:url value="/images/oris_logo.png"/>" /></a>
 			</h3>
 			<%@include file="homeNav.jsp"%>
 		</div>
+</div>
 		<div class="container-eventop">
 			<div class="event-header">
 				 <h2>Trainings / Events / Seminars / Workshop</h2>

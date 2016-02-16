@@ -22,20 +22,31 @@
 		    max-height:250px;
 		    
 		}
+		#header{
+		padding: .6em 0 0 0 !important;
+		}	
+		#header >h3{
+			margin-bottom: .6em !important;
+		}
+		#imgOr {
+		    margin: auto !important;
+	   		width: 30% !important;
+	   		padding-bottom: 3px !important;
+	   	}
 		
 	</style>
 	
-	<div id="page-wrapper">
-			<!-- Header -->
-			<div id="header">
-				<!-- Logo -->
-				<h3>
-					<a href="<c:url value="/web/home"/>" id="logo">
-					<font face="Arial"><b>ORIS Oral Implant Solutions Inc</b></font></a>
-				</h3><br>
-				<%@include file="homeNav.jsp"%>
-			</div>
-	</div>
+<div id="page-wrapper">
+		<!-- Header -->
+		<div id="header">
+			<!-- Logo -->
+			<h3>
+				<a href="<c:url value="/web/home"/>" id="logo">
+				<img class="img-responsive" id="imgOr" src="<c:url value="/images/oris_logo.png"/>" /></a>
+			</h3>
+			<%@include file="homeNav.jsp"%>
+		</div>
+</div>
 	
 	<br><br>
 	
@@ -112,7 +123,7 @@
 						 </div> 	
 						 <div class="col-lg-10">
 					         	<div class="form-group">
-							        <label class="col-lg-4 control-label">Handheld #</label>
+							        <label class="col-lg-4 control-label">Mobile Phone #</label>
 						        	<div class="col-lg-7">
 						      			<form:input path="contactNo" cssClass="form-control" maxlength="11" />
 						      		</div>

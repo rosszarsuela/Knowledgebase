@@ -32,11 +32,19 @@ $(document).ready(function() {
 	                    }
 	                }
 	            },
+	            
+	            profession: {
+	                validators: {
+	                    notEmpty: {
+	                        message: 'Please provide Profession.'
+	                    }
+	                }
+	            },
 	         
 	            address: {
 	            	validators: {
 	            		notEmpty: {
-	            			message: 'Please enter Address.'
+	            			message: 'Please enter School(s).'
 	            		},
 	            		regexp:{
 	            			regexp: /^[a-z0-9\s,'-]*$/i,
@@ -59,34 +67,7 @@ $(document).ready(function() {
 		                }
 	                }
 	            },
-	            
-	           /* contactNo: {
-	                validators: {
-	                    notEmpty: {
-	                        message: 'Please provide Contact No. mobile or landline.'
-	                    },
-	                    
-	                    callback: {
-	                        message: 'The Contact No. is not valid',
-	                        callback: function(value, validator, $field) {
-	                            if (value === '') {
-	                                return true;
-	                            }
-	                            
-	                            if (value.search(/[0-9]+$/) < 0) {
-	                                return {
-	                                    valid: false,
-	                                    message: 'Contact No. should only contain numeric characters.'
-	                                 }
-	                             }
-	                                
-	                             if (value.length < 7) { 
-	                            	 return {
-	                            		 valid: false,
-	                            		 message:'Contact No. cannot be less than 7 numbers.'
-	                            	 }
-                        		 }
-	                       },*/
+	         
 	            
 	            email: {
 	                    validators: {

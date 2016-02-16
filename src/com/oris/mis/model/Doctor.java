@@ -31,10 +31,14 @@ public class Doctor implements Serializable {
 	private String lastName;
 	private String middleName;
 	private String firstName;
-	private String address;
+	private String school1;
+	private String school2;
+	private String course1;
+	private String course2;
 	private String contactNo;
 	private String email;
 	private String profession;
+	private String title;
 	private CommonsMultipartFile image;
 	private String contentType;
 	private byte[] picture;
@@ -89,16 +93,44 @@ public class Doctor implements Serializable {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
-	@Column(name = "ADDRESS")
-	public String getAddress() {
-		return StringUtils.isNotEmpty(address) ? address.toUpperCase() : address;
+	
+	@Column(name = "SCHOOL_NAME1" )
+	public String getSchool1() {
+		return school1; 
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setSchool1(String school1) {
+		this.school1 = school1;
+	}
+	
+	@Column(name = "SCHOOL_NAME2")
+	public String getSchool2() {
+		return school2;
+	}
+	
+	public void setSchool2(String school2) {
+		this.school2 = school2;
+	}
+	
+	@Column(name = "COURSE_NAME1")
+	public String getCourse1() {
+		return course1;
 	}
 
+	public void setCourse1(String course1) {
+		this.course1 = course1;
+	}
+	
+	@Column(name = "COURSE_NAME2")
+	public String getCourse2() {
+		return course2;
+	}
+
+	public void setCourse2(String course2) {
+		this.course2 = course2;
+	}
+
+	
 	@Column(name = "CONTACT_NO")
 	public String getContactNo() {
 		return contactNo;
@@ -264,8 +296,27 @@ public class Doctor implements Serializable {
 		this.sortBy = sortBy;
 	}
 	
+	@Column(name = "TITLE")
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	@Transient
 	public String getCompleteName() {
-		return getFirstName() + " " + getMiddleName().substring(0, 1) + ". " + getLastName();
+		return getFirstName() + " " + getMiddleName().substring(0, 1) + ". " + getLastName() + ", " + getTitle();
+	}
+	
+	@Transient
+	public String getFullCourse1() {
+		return "(" + getCourse1() + ")";
+	}
+	
+	@Transient
+	public String getFullCourse2() {
+		return "(" + getCourse2() + ")";
 	}
 }

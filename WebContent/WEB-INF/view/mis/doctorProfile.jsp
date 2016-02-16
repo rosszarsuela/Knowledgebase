@@ -42,6 +42,18 @@
 			margin-right:-20%;
 			margin-left: 80%;
 		}
+	#header {
+		padding: 0.9em 0 0 0 !important;	
+	}
+	#header >h3{
+		margin-bottom: -0.9em !important;
+		margin-left: 8em !important;
+	}
+	#imgOr {
+	    margin: auto !important; 
+   		width: 30% !important;
+   		padding-bottom: 3px !important;
+	}
 </style>
 
 
@@ -51,10 +63,11 @@
 			<div id="header">
 				<!-- Logo -->
 				<h3>
-					<a href="<c:url value="/web/home"/>" id="logo">
-					<font face="Arial"><b>ORIS Oral Implant Solutions Inc</b></font></a>
-				</h3><br>
-				<%@include file="../mis/misNav.jsp"%>
+				<a href="<c:url value="/web/home"/>" id="logo">
+				<img class="img-responsive" id ="imgOr" src="<c:url value="/images/oris_logo.png"/>" />
+			</a>
+			</h3><br>
+			<%@include file="../mis/misNav.jsp"%>
 			</div>
 </div>
 			
@@ -126,10 +139,30 @@
 					<label class="control-label">Profession</label>
 	      			<form:input path="profession" cssClass="form-control"></form:input>
 			</div>
+			
+			<div class="form-group control-label">
+					<label class="control-label">Titles</label>
+	      			<form:input path="title" cssClass="form-control" placeholder="DMD, MSC"></form:input>
+			</div>
 		            
 			<div class="form-group control-label">
-					<label class="control-label">Schools</label>
-	      			<form:textarea path="address" cssClass="form-control" rows="5"></form:textarea>
+					<label class="control-label">School Name 1</label>
+	      			<form:textarea path="school1" cssClass="form-control" rows="3"></form:textarea>
+			</div>
+			
+			<div class="form-group control-label">
+					<label class="control-label">Course 1</label>
+	      			<form:input path="course1" cssClass="form-control" ></form:input>
+			</div>
+			
+			<div class="form-group control-label">
+					<label class="control-label">School Name 2</label>
+	      			<form:textarea path="school2" cssClass="form-control" rows="3"></form:textarea>
+			</div>
+			
+			<div class="form-group control-label">
+					<label class="control-label">Course 2</label>
+	      			<form:input path="course2" cssClass="form-control"></form:input>
 			</div>
 			
     	   <div class="form-group control-label">

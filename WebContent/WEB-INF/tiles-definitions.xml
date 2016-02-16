@@ -41,6 +41,11 @@
         <put-attribute name="body" value="/WEB-INF/view/common/viewDoctors.jsp"/>
     </definition>
     
+    <definition name="viewCommonConsultants" extends="layout">
+        <put-attribute name="title" value="Consultants"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/viewConsultants.jsp"/>
+    </definition>
+    
     <definition name="viewCommonEvents" extends="layout">
         <put-attribute name="title" value="Events"/>
         <put-attribute name="body" value="/WEB-INF/view/common/viewEvents.jsp"/>
@@ -78,6 +83,21 @@
         <put-attribute name="body" value="/WEB-INF/view/common/contact.jsp"/>
     </definition>
     
+    <definition name="callUs" extends="layout">
+        <put-attribute name="title" value="Call Us"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/callUs.jsp"/>
+    </definition>
+    
+    <definition name="corporateOffice" extends="layout">
+        <put-attribute name="title" value="Visit Us"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/corporateOffice.jsp"/>
+    </definition>
+    
+     <definition name="contactForm" extends="layout">
+        <put-attribute name="title" value="Contact Form"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/contactForm.jsp"/>
+    </definition>
+     
     <definition name="exceptionPage" extends="layout">
         <put-attribute name="title" value="Whoops!"/>
         <put-attribute name="body" value="/WEB-INF/view/common/generalErrorPage.jsp"/>
@@ -110,6 +130,16 @@
     <definition name="viewDoctors" extends="layout">
         <put-attribute name="title" value="View Doctors"/>
         <put-attribute name="body" value="/WEB-INF/view/mis/viewDoctors.jsp"/>
+    </definition>
+    
+      <definition name="consultantProfile" extends="layout">
+        <put-attribute name="title" value="Consultant Profile"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/consultantProfile.jsp"/>
+    </definition>
+    
+    <definition name="viewConsultant" extends="layout">
+        <put-attribute name="title" value="View Consultants"/>
+        <put-attribute name="body" value="/WEB-INF/view/mis/viewConsultants.jsp"/>
     </definition>
     
     <definition name="customerProfile" extends="layout">

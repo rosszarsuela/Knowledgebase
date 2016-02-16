@@ -22,7 +22,9 @@ import com.oris.base.BaseController;
 import com.oris.enums.StatusEnum;
 import com.oris.mis.model.Brand;
 import com.oris.mis.model.Product;
+import com.oris.mis.model.ProductImages;
 import com.oris.mis.model.SolutionsCategory;
+import com.oris.mis.model.Specifications;
 import com.oris.mis.service.MISService;
 import com.oris.util.InventoryUtility;
 import com.oris.util.Page;
@@ -76,14 +78,24 @@ public class ProductsController extends BaseController {
 		response.sendRedirect(request.getContextPath() + REDIRECT_VIEW_PRODUCT);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/edit", method=RequestMethod.GET)
-	public String editSupplier(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+	public String editSupplier(HttpServletRequest request, ModelMap model) {
 		Long id = Long.parseLong(request.getParameter("id"));
 		Product product = misService.get(Product.class, id);
 		
-		model.addAttribute("productCommand", product);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("product.id", product.getId());
+		map.put("orderBy", "id");
+		
+		product.setSpecs((List<Specifications>)misService.getAllByHashMap(Specifications.class, map));
+		map.put("isDeleted", false);
+		product.setProductImages((List<ProductImages>)misService.getAllByHashMap(ProductImages.class, map));
+		
+		model.addAttribute("status", initStatus());
 		model.addAttribute("categoryList", getSolutionsCategory());
 		model.addAttribute("brandsList", getBrands());
+		model.addAttribute("productCommand", product);
 		return ADD_EDIT_PRODUCT;
 	}
 	
@@ -113,6 +125,7 @@ public class ProductsController extends BaseController {
 	public String registrationForm(@ModelAttribute("productCommand") final Product product, ModelMap model) {
 		model.addAttribute("categoryList", getSolutionsCategory());
 		model.addAttribute("brandsList", getBrands());
+		model.addAttribute("status", initStatus());
 		return ADD_EDIT_PRODUCT;
 	}
 	

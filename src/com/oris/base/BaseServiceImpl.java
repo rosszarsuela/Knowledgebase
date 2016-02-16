@@ -19,6 +19,10 @@ public class BaseServiceImpl implements BaseService{
 	private BaseDao baseDao;
 	private MessageService mailService;
 	
+	public Integer getDoctorSize() {
+		return Integer.parseInt(Config.getProperties("mis.doctor.view.size"));
+	}
+	
 	public Integer getSize() {
 		return Integer.parseInt(Config.getProperties("views.mis.view.size"));
 	}

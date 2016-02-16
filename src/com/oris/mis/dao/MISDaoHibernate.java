@@ -21,6 +21,7 @@ import org.springframework.stereotype.Repository;
 import com.oris.base.BaseDaoHibernate;
 import com.oris.enums.StatusEnum;
 import com.oris.mis.model.Brand;
+import com.oris.mis.model.Consultants;
 import com.oris.mis.model.Customer;
 import com.oris.mis.model.Doctor;
 import com.oris.mis.model.Event;
@@ -199,6 +200,60 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		map.put(KEY_LIST, customerList);
 		return map;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, Object> viewMentors(Doctor doctor) {
+		Map<String, Object> map = new HashMap<String, Object>();		
+		StringBuffer dynamicSql = new StringBuffer();
+		
+		//Generate sqlCount query
+		StringBuffer hqlQueryCount = new StringBuffer("select count(*) from Doctor d where 1=1 ");
+		StringBuffer hqlQuery = new StringBuffer("from Doctor d where 1=1 ");
+		
+		if(!InventoryUtility.isNull(doctor.getId())) {
+			dynamicSql.append("and d.id = :id ");
+		}
+		
+		if(!InventoryUtility.isNull(doctor.getStatus())) {
+			dynamicSql.append("and d.status = :status ");
+		}
+		
+		if(StringUtils.isNotEmpty(doctor.getOrderBy())) {
+			dynamicSql.append("order by ").append(doctor.getOrderBy());			
+			if(StringUtils.isNotEmpty(doctor.getSortBy())) {
+				dynamicSql.append(" ").append(doctor.getSortBy());
+			}
+		}
+		
+		final String sql =  hqlQuery.append(dynamicSql).toString();
+		final String sqlCount =  hqlQueryCount.append(dynamicSql).toString();
+		
+		Query query = getSession().createQuery(sql);
+		Query queryCount = getSession().createQuery(sqlCount);
+		
+		if(!InventoryUtility.isNull(doctor.getId())) {
+			query.setParameter("id", doctor.getId());
+			queryCount.setParameter("id", doctor.getId());
+		}
+		
+		if(!InventoryUtility.isNull(doctor.getStatus())) {
+			query.setParameter("status", doctor.getStatus());
+			queryCount.setParameter("status", doctor.getStatus());
+		}
+
+		if(!InventoryUtility.isNull(doctor.getBegin())) {
+			query.setFirstResult((doctor.getBegin() - 1) * getDoctorSize());
+			query.setMaxResults(getDoctorSize());
+		}
+		
+		Integer count = Integer.parseInt(queryCount.list().get(0).toString());
+		List<Doctor> customerList = query.list();
+		
+		map.put(KEY_COUNT, count);
+		map.put(KEY_LIST, customerList);
+		return map;
+	}
 
 	@Override
 	public boolean isCustomerExists(String param) {
@@ -234,9 +289,9 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		
 		//Generate sqlCount query
 		StringBuffer hqlQueryCount = new StringBuffer("select count(*) from Product p " + "inner join p.brand b " +
-													  "inner join p.category sc inner join sc.solution s " + "where 1=1 ");
+													  "inner join p.category sc inner join sc.solution s " + "left join p.specs " + "where 1=1 ");
 		
-		StringBuffer hqlQuery = new StringBuffer("from Product p " + "inner join fetch p.brand b " + "inner join fetch p.category sc inner join fetch sc.solution s " + "where 1=1 ");
+		StringBuffer hqlQuery = new StringBuffer("from Product p " + "inner join fetch p.brand b " + "inner join fetch p.category sc inner join fetch sc.solution s " + "left join fetch p.specs " + "where 1=1 ");
 		
 		if(!InventoryUtility.isNull(product.getCategory()) && !InventoryUtility.isNull(product.getCategory().getSolution().getId())) {
 			dynamicSql.append("and s.id = :solutionId ");
@@ -252,6 +307,10 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		
 		if(StringUtils.isNotEmpty(product.getName())) {
 			dynamicSql.append("and lower(p.name) like lower(:search) ");
+		}
+		
+		if(!InventoryUtility.isNull(product.getStatus())) {
+			dynamicSql.append("and p.status =:status ");
 		}
 		
 		if(StringUtils.isNotEmpty(product.getOrderBy())) {
@@ -285,6 +344,11 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		if(StringUtils.isNotEmpty(product.getName())) {
 			query.setParameter("search", "%"+product.getName()+"%");
 			queryCount.setParameter("search", "%"+product.getName()+"%");
+		}
+		
+		if(!InventoryUtility.isNull(product.getStatus())) {
+			query.setParameter("status", product.getStatus());
+			queryCount.setParameter("status", product.getStatus());
 		}
 
 		if(!InventoryUtility.isNull(product.getBegin())) {
@@ -379,6 +443,7 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		
 		Query query = getSession().createQuery(sql);
 		Query queryCount = getSession().createQuery(sqlCount);
+		
 		if(StringUtils.isNotEmpty(event.getName())) {
 			query.setParameter("search", "%"+event.getName()+"%");
 			queryCount.setParameter("search", "%"+event.getName()+"%");
@@ -571,5 +636,76 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 			return results.get(0);
 		
 		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, Object> viewConsultant(Consultants consultant) {
+		Map<String, Object> map = new HashMap<String, Object>();		
+		StringBuffer dynamicSql = new StringBuffer();
+		
+		//Generate sqlCount query
+		StringBuffer hqlQueryCount = new StringBuffer("select count(*) from Consultants con where 1=1 ");
+		StringBuffer hqlQuery = new StringBuffer("from Consultants con where 1=1 ");
+		
+		if(StringUtils.isNotEmpty(consultant.getSearch())) {
+			dynamicSql.append("and ( lower(con.firstName) like lower(:search) or lower(con.middleName) like lower(:search) " +
+							  "or lower(con.lastName) like lower(:search) or lower(con.address) like lower(:search) ) ");
+		}
+		
+		if(!InventoryUtility.isNull(consultant.getStatus())) {
+			dynamicSql.append("and con.status = :status ");
+		}
+		
+		if(StringUtils.isNotEmpty(consultant.getOrderBy())) {
+			dynamicSql.append("order by ").append(consultant.getOrderBy());			
+			if(StringUtils.isNotEmpty(consultant.getSortBy())) {
+				dynamicSql.append(" ").append(consultant.getSortBy());
+			}
+		}
+		
+		final String sql =  hqlQuery.append(dynamicSql).toString();
+		final String sqlCount =  hqlQueryCount.append(dynamicSql).toString();
+		
+		Query query = getSession().createQuery(sql);
+		Query queryCount = getSession().createQuery(sqlCount);
+		if(StringUtils.isNotEmpty(consultant.getSearch())) {
+			query.setParameter("search", "%"+consultant.getSearch()+"%");
+			queryCount.setParameter("search", "%"+consultant.getSearch()+"%");
+		}
+		
+		if(!InventoryUtility.isNull(consultant.getStatus())) {
+			query.setParameter("status", consultant.getStatus());
+			queryCount.setParameter("status", consultant.getStatus());
+		}
+
+		if(!InventoryUtility.isNull(consultant.getBegin())) {
+			query.setFirstResult((consultant.getBegin() - 1) * getSize());
+			query.setMaxResults(getSize());
+		}
+		
+		Integer count = Integer.parseInt(queryCount.list().get(0).toString());
+		List<Consultants> customerList = query.list();
+		
+		map.put(KEY_COUNT, count);
+		map.put(KEY_LIST, customerList);
+		return map;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Doctor> getDoctorList() {
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT d.doctor_id_pk AS id, d.last_name AS lastName FROM doctor d ");
+		sql.append("GROUP BY d.last_name ");
+		sql.append("ORDER BY d.last_name ASC ");
+		
+		List<Doctor> results = getSession().createSQLQuery(sql.toString())
+		.addScalar("doctorId",StandardBasicTypes.LONG)
+		.addScalar("doctorName", StandardBasicTypes.STRING)
+		.setResultTransformer(Transformers.aliasToBean(Doctor.class))
+		.list();
+		
+		return results;
 	}
 }

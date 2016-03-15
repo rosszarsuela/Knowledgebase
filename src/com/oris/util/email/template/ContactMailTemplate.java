@@ -3,15 +3,8 @@ package com.oris.util.email.template;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import javax.activation.DataSource;
-import javax.mail.util.ByteArrayDataSource;
-
-import org.apache.commons.lang.StringUtils;
-
 import com.oris.mis.model.Client;
-import com.oris.mis.model.Participants;
 import com.oris.util.Config;
-import com.oris.util.DateUtility;
 import com.oris.util.StrUtil;
 
 public class ContactMailTemplate extends EmailTemplate{

@@ -14,9 +14,8 @@ import com.oris.base.BaseController;
 import com.oris.enums.LinksEnum;
 import com.oris.enums.StatusEnum;
 import com.oris.mis.model.Event;
-import com.oris.mis.model.Videos;
-/*import com.oris.mis.model.Product;*/
 import com.oris.mis.model.Solution;
+import com.oris.mis.model.Videos;
 import com.oris.mis.service.MISService;
 import com.oris.util.Config;
 import com.oris.util.InventoryUtility;

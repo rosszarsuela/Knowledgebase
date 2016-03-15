@@ -66,5 +66,5 @@ public interface MISDao extends BaseDao {
 	
 	//Doctors for Educators
 	List<Doctor> getDoctorList();
-	
+		
 }

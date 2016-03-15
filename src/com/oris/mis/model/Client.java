@@ -24,8 +24,8 @@ public class Client implements Serializable {
 	private String middleName;
 	private String lastName;
 	private String email;
-	private Integer contactNo;
-	private Integer alcontactNo;
+	private String contactNo;
+	private String alcontactNo;
 	private Date createdDate;
 
 	@Id
@@ -86,20 +86,20 @@ public class Client implements Serializable {
 	}
 	
 	@Column (name ="CONTACT_NO")
-	public Integer getContactNo() {
+	public String getContactNo() {
 		return contactNo;
 	}
 
-	public void setContactNo(Integer contactNo) {
+	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
 	
 	@Column (name ="AL_CONTACT_NO")
-	public Integer getAlcontactNo() {
+	public String getAlcontactNo() {
 		return alcontactNo;
 	}
 
-	public void setAlcontactNo(Integer alcontactNo) {
+	public void setAlcontactNo(String alcontactNo) {
 		this.alcontactNo = alcontactNo;
 	}
 	

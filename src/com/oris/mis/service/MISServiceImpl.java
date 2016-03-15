@@ -118,15 +118,15 @@ public class MISServiceImpl extends BaseServiceImpl implements MISService{
 	@Override
 	public void createProduct(Product product) {
 		List<Specifications> sp = product.getSpecs();
+		product.setSpecs(null);
 		List<ProductImages> productImages = product.getProductImages();
 		product.setProductImages(null);
-		product.setSpecs(null);
 		
 		if(InventoryUtility.isNull(product.getCategory().getId())) {
 			product.setCategory(null);
-		}
+			
 		
-		if(InventoryUtility.isNull(product.getId())) {
+		} else if(InventoryUtility.isNull(product.getId())) {
 			product.setCreatedBy(InventoryUtility.getLoginUser());
 			product.setCreatedDate(new Date());
 		} else {
@@ -135,12 +135,15 @@ public class MISServiceImpl extends BaseServiceImpl implements MISService{
 		}
 		
 		Product p = (Product) misDao.save(product);
-		
 		misDao.deleteObjIn(Specifications.class, null, "product.id", p.getId());
 		
-		for(Specifications specifications : sp) {
-			specifications.setProduct(p);
-			save(specifications);
+		if(!InventoryUtility.isNull(sp) && sp.size() > 0) {
+			for(Specifications specification : sp) {
+				if(!specification.getSpecification().equals("") || !specification.getSpec1().equals("") || !specification.getSpec2().equals("") || !specification.getSpec3().equals("")) {
+					specification.setProduct(new Product(p.getId()));
+					save(specification);
+				}
+			}
 		}
 		
 		HashMap<String, Object> update = new HashMap<String, Object>();
@@ -377,4 +380,5 @@ public class MISServiceImpl extends BaseServiceImpl implements MISService{
 	public List<Doctor> getDoctorList() {
 		return misDao.getDoctorList();
 	}
+	
 }

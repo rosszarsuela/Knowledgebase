@@ -30,17 +30,21 @@ import com.oris.mis.model.Doctor;
 import com.oris.mis.model.Event;
 import com.oris.mis.model.Participants;
 import com.oris.mis.model.Product;
+import com.oris.mis.model.ProductImages;
 import com.oris.mis.model.Solution;
 import com.oris.mis.model.SolutionsCategory;
+import com.oris.mis.model.Specifications;
 import com.oris.mis.model.dto.ProductsAndServicesMenu;
 import com.oris.mis.service.MISService;
 import com.oris.util.Config;
 import com.oris.util.InventoryUtility;
 import com.oris.util.Page;
 import com.oris.util.email.MessageService;
+import com.oris.util.email.SimpleClientSmtpMessageService;
+import com.oris.util.email.SimpleClientSmtpServiceConfig;
 import com.oris.util.email.SimpleSmtpMessageService;
 import com.oris.util.email.SimpleSmtpServiceConfig;
-import com.oris.util.email.template.ContactMailTemplate;
+import com.oris.util.email.template.ContactEmailTemplate;
 import com.oris.util.email.template.EventMailTemplate;
 import com.oris.util.email.template.MessageTemplate;
 
@@ -59,6 +63,7 @@ public class CommonController extends BaseController {
 	
 	//Constant variables
 	private static final String VIEW_DOCTORS = "viewCommonDoctors";
+	/*private static final String VIEW_DOCTORS_INFO = "viewCommonDoctors";*/
 	private static final String VIEW_CONSULTANTS = "viewCommonConsultants";
 	private static final String VIEW_SOLUTIONS= "viewCommonSolutions";
 	private static final String VIEW_EVENTS = "viewCommonEvents";
@@ -66,10 +71,8 @@ public class CommonController extends BaseController {
 	private static final String VIEW_EVENT_REGISTRATION ="/web/view/event/info";
 	private static final String VIEW_PORTFOLIO = "viewCommonPortfolio";
 	private static final String VIEW_PORTFOLIO_INFO = "viewPortfolioInfo";
-	private static final String CONTACT_US = "contactPage";
-	private static final String VIEW_CALL_US = "callUs";
-	private static final String VIEW_LOCATION = "viewLocation";
-	
+	private static final String CONTACT_US_RE = "/web/view/contact/form";
+
 
 	@RequestMapping(value="/view/mentors")
 	public String viewDoctors(HttpServletRequest request, ModelMap model, @ModelAttribute("doctorCommand") final Doctor doctor) {
@@ -77,9 +80,9 @@ public class CommonController extends BaseController {
 				Integer.parseInt(getMessageValue("views.mis.view.begin")) 
 				: Integer.parseInt(request.getParameter("begin"));
 														
-		orderBy = request.getParameter("orderBy")  == null ? "d.lastName" : request.getParameter("orderBy");
+		orderBy = request.getParameter("orderBy")  == null ? "d.createdDate" : request.getParameter("orderBy");
 		sortBy = request.getParameter("sortBy") == null ? "ASC" : request.getParameter("sortBy");
-			
+		
 		doctor.setBegin(begin);
 		doctor.setOrderBy(orderBy);
 		doctor.setSortBy(sortBy);
@@ -94,14 +97,14 @@ public class CommonController extends BaseController {
 		model.addAttribute("activeMenu", LinksEnum.TRAINING.getId());
 		return VIEW_DOCTORS;
 	}
-	
+		
 	@RequestMapping(value="/view/consultants")
 	public String viewConsultant(HttpServletRequest request, ModelMap model, @ModelAttribute("consultantCommand") final Consultants consultant) {
 		begin = request.getParameter("begin") == null ? 
 				Integer.parseInt(getMessageValue("views.mis.view.begin")) 
 				: Integer.parseInt(request.getParameter("begin"));
 														
-		orderBy = request.getParameter("orderBy")  == null ? "con.lastName" : request.getParameter("orderBy");
+		orderBy = request.getParameter("orderBy")  == null ? "con.createdDate" : request.getParameter("orderBy");
 		sortBy = request.getParameter("sortBy") == null ? "ASC" : request.getParameter("sortBy");
 		
 		consultant.setBegin(begin);
@@ -237,7 +240,7 @@ public class CommonController extends BaseController {
 		template = EventMailTemplate.newTemplate(email, obj);
 		mailService.sendMessage(template);
 		
-		response.sendRedirect(request.getContextPath() + VIEW_EVENT_REGISTRATION + "?id=" + participant.getEvent().getId());
+		response.sendRedirect(request.getContextPath() + VIEW_EVENT_REGISTRATION + "?id=" + participant.getEvent());
 	}
 	
 	@RequestMapping(value="/payment", method=RequestMethod.GET)
@@ -249,6 +252,7 @@ public class CommonController extends BaseController {
 		response.sendRedirect(request.getContextPath() + VIEW_EVENT_REGISTRATION + "?id="+p.getEvent().getImageContent()+"&participantId="+p.getId());
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/view/portfolio")
 	public String viewProducts(HttpServletRequest request, ModelMap model, @ModelAttribute("productCommand") final Product product) throws IOException {
 		begin = request.getParameter("begin") == null ? 
@@ -280,10 +284,28 @@ public class CommonController extends BaseController {
 			page = misService.viewBrands(new Brand());
 			model.addAttribute("product", product);
 		} else if(InventoryUtility.isNull(product.getId()) && !InventoryUtility.isNull(product.getBrand().getId())){
+			Brand b = misService.get(Brand.class, product.getBrand().getId());
+			model.addAttribute("brand", b.getCode());
+			
 			model.addAttribute("product", product);
 			page = misService.viewProducts(product);
+			
 		} else if(!InventoryUtility.isNull(product.getId()) && !InventoryUtility.isNull(product.getBrand().getId())){
+			Brand b = misService.get(Brand.class, product.getBrand().getId());
+			model.addAttribute("brand", b.getCode());
+			
+			
 			Product p = misService.get(Product.class, product.getId());
+			model.addAttribute("brandEvent", p.getName());
+			
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("product.id", p.getId());
+			map.put("orderBy", "id");
+			
+			p.setSpecs((List<Specifications>) misService.getAllByHashMap(Specifications.class, map));
+			map.put("isDeleted", false);
+			
+			p.setProductImages((List<ProductImages>)misService.getAllByHashMap(ProductImages.class, map));
 			model.addAttribute("product", p);
 		} 
 				
@@ -310,7 +332,6 @@ public class CommonController extends BaseController {
 	public String editSupplier(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 		Long id = Long.parseLong(request.getParameter("id"));
 		Product product = misService.get(Product.class, id);
-		
 		model.addAttribute("productCommand", product);
 		model.addAttribute("activeMenu", LinksEnum.PRODUCT.getId());
 		return VIEW_PORTFOLIO_INFO;
@@ -338,8 +359,8 @@ public class CommonController extends BaseController {
 		Long id = Long.parseLong(request.getParameter("id"));
 		Product product = misService.get(Product.class, id);
 	    try {
-	        byte[] documentInBytes = product.getManual();
-	        response.setHeader("Content-Disposition", "filename="+product.getName()+"_Manual.pdf");
+	        byte[] documentInBytes = product.getBrand().getManual();
+	        response.setHeader("Content-Disposition", "filename="+product.getBrand().getManualName()+"_Manual.pdf");
 	        response.setDateHeader("Expires", -1);
 	        response.setContentType("application/pdf");
 	        response.setContentLength(documentInBytes.length);
@@ -364,18 +385,18 @@ public class CommonController extends BaseController {
 	
 		Client obj = misService.createClient(client);
 		
-		SimpleSmtpServiceConfig smtpConfig = new SimpleSmtpServiceConfig("smtp", "smtp.gmail.com", 587, "devism41l@gmail.com","devisyakshas01", false, true, true);
-		MessageService mailService = new SimpleSmtpMessageService();
+		SimpleClientSmtpServiceConfig smtpConfig = new SimpleClientSmtpServiceConfig("smtp", "smtp.gmail.com", 587, "devism41l@gmail.com","devisyakshas01", false, true, true);
+		MessageService mailService = new SimpleClientSmtpMessageService();
 		mailService.setConfig(smtpConfig);
 		
 		MessageTemplate template = null;
 		
 		String email = Config.getProperties("email.from");
 			
-		template = ContactMailTemplate.newTemplate(email, obj);
+		template = ContactEmailTemplate.newTemplate(email, obj);
 		mailService.sendMessage(template);
 		
-		response.sendRedirect(request.getContextPath() + CONTACT_US);
+		response.sendRedirect(request.getContextPath() + CONTACT_US_RE);
 	}
 	
 	/*@RequestMapping(value="/view/downloadPdf", method=RequestMethod.GET)

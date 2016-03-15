@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.oris.base.BaseController;
+import com.oris.mis.model.Brand;
 import com.oris.mis.model.Event;
 import com.oris.mis.model.Speaker;
 import com.oris.mis.service.MISService;
@@ -93,9 +94,15 @@ public class EventsController extends BaseController {
 		
 		event.setSpeakers((List<Speaker>)misService.getAllByHashMap(Speaker.class, map));
 		
+		model.addAttribute("brandList", getBrands());
 		model.addAttribute("status", initStatus());
 		model.addAttribute("eventCommand", event);
 		return ADD_EDIT_EVENT;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<Brand> getBrands() {
+		return (List<Brand>) misService.getAll(Brand.class, "name");
 	}
 	
 	@RequestMapping(value="/view")
@@ -122,6 +129,7 @@ public class EventsController extends BaseController {
 
 	@RequestMapping(value="/form", method=RequestMethod.GET)
 	public String registrationForm(@ModelAttribute("eventCommand") final Event event, ModelMap model) {
+		model.addAttribute("brandsList", getBrands());
 		model.addAttribute("status", initStatus());
 		return ADD_EDIT_EVENT;
 	}

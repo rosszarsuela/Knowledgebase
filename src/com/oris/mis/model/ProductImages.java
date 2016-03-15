@@ -16,6 +16,8 @@ import javax.persistence.Transient;
 import org.directwebremoting.annotations.DataTransferObject;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "product_images")
@@ -103,6 +105,11 @@ public class ProductImages implements Serializable {
 	
 	public void setContentType(String contentType) {
 		this.contentType = contentType;
+	}
+	
+	@Transient
+	public String getImageContent() {
+		return "data:"+getContentType()+";base64," + Base64.encode(getPImage());
 	}
 	
 	@Column(name = "IS_DELETED")

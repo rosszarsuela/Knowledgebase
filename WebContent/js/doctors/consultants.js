@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	pageSize = 4;
+	/*pageSize = 4;
 	var i = 1;
 	showPage = function(page) {
 	    $(".educators-picture").hide();
@@ -15,7 +15,7 @@ $(document).ready(function() {
 	    });  
 	};
 	
-	showPage(i);
+	showPage(i);*/
 	
 	$("#previous").click(function() {
 	    $("#next").removeClass("current");

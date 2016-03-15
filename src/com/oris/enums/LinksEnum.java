@@ -9,7 +9,7 @@ public enum LinksEnum {
 	TRAINING(4, "Training"),
 	EVENTS(5, "Events"),
 	CONTACT(6, "Contact Us"),
-	FAQ(7, "FAQ");
+	TESTIMONIALS(7, "Testimonials");
 	
 	
 	private LinksEnum(Integer id, String description) {

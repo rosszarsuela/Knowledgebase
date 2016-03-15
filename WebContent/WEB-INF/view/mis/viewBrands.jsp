@@ -1,13 +1,27 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="../common/taglibs.jsp"%>
-
+<style>
+	#header {
+		padding: 0.9em 0 0 0 !important;	
+	}
+	#header >h3{
+		margin-bottom: -0.9em !important;
+		margin-left: 8em !important;
+	}
+	#imgOr {
+	    margin: auto !important; 
+   		width: 30% !important;
+   		padding-bottom: 3px !important;
+	}
+</style>
 <div id="page-wrapper">
 		<!-- Header -->
 		<div id="header">
 			<!-- Logo -->
 			<h3>
 				<a href="<c:url value="/web/home"/>" id="logo">
-				<font face="Arial"><b>ORIS Oral Implant Solutions Inc</b></font></a>
+				<img class="img-responsive" id ="imgOr" src="<c:url value="/images/oris_logo.png"/>" />
+			</a>
 			</h3><br>
 			<%@include file="../mis/misNav.jsp"%>
 		</div>

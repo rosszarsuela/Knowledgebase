@@ -123,6 +123,23 @@
 			<img alt="Loading" src="<c:url value='/images/icon/loading.gif'/>">
 		</div> --%>
 		
+		 <!-- IMAGE MODAL -->
+        <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                
+              </div>
+              <div class="modal-body">
+                <img class="img-responsive">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+		
         <noscript>Your browser does not support JavaScript! Some functions will not work properly.</noscript>
 		
 		<input type="hidden" id="principalUser" value="${principalUser}"/>
@@ -140,7 +157,7 @@
         <%--Header --%>
         <div id="header_wrap">
             <div class="top_bar">                
-                <div class="logout_bar" style="float: right; color: white;">
+                <div class="logout_bar" style="float: right; color: black;">
                 	  <security:authorize ifNotGranted="ANONYMOUS">
 				            <c:out value="${loggedUser} "/>
                             &nbsp;|&nbsp;

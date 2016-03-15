@@ -31,6 +31,11 @@
         <put-attribute name="body" value="/WEB-INF/view/common/about.jsp"/>
     </definition>
     
+     <definition name="testimonialPage" extends="layout">
+        <put-attribute name="title" value="Testimonials"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/testimonials.jsp"/>
+    </definition>
+    
     <definition name="portfolioPage" extends="layout">
         <put-attribute name="title" value="Portfolio"/>
         <put-attribute name="body" value="/WEB-INF/view/common/portfolio.jsp"/>
@@ -83,9 +88,14 @@
         <put-attribute name="body" value="/WEB-INF/view/common/contact.jsp"/>
     </definition>
     
-      <definition name="callUs" extends="layout">
+    <definition name="callUs" extends="layout">
         <put-attribute name="title" value="Call Us"/>
         <put-attribute name="body" value="/WEB-INF/view/common/callUs.jsp"/>
+    </definition>
+    
+    <definition name="corporateOffice" extends="layout">
+        <put-attribute name="title" value="Visit Us"/>
+        <put-attribute name="body" value="/WEB-INF/view/common/corporateOffice.jsp"/>
     </definition>
     
      <definition name="contactForm" extends="layout">
@@ -127,7 +137,7 @@
         <put-attribute name="body" value="/WEB-INF/view/mis/viewDoctors.jsp"/>
     </definition>
     
-      <definition name="consultantProfile" extends="layout">
+    <definition name="consultantProfile" extends="layout">
         <put-attribute name="title" value="Consultant Profile"/>
         <put-attribute name="body" value="/WEB-INF/view/mis/consultantProfile.jsp"/>
     </definition>

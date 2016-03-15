@@ -8,9 +8,29 @@
 	}
 	h1 {
 	    color: inherit;
-	    font-weight: 600;
+	    font-weight: bold;
 	    line-height: 1.75em;
-	    margin-bottom: 0em;
+	    margin-bottom: -0.70em;
+	    text-align:center;
+	    font-size:14px;
+	}
+	#header{
+	padding:1em 0 0 0;
+	}
+	#imgOr {
+	    margin: auto;
+   		width: 30%;
+   		padding-bottom: 5px;
+	}
+	
+	p {
+		text-align:center;
+		font-size:11px;
+		font-weight:600;
+	}
+	
+	.container {
+		margin:30px 0 -55px 0px;
 	}
 
 </style>
@@ -21,10 +41,11 @@
 			<!-- Logo -->
 			<h3>
 				<a href="<c:url value="/web/home"/>" id="logo">
-				<font face="Arial"><b>ORIS Oral Implant Solutions Inc</b></font></a>
+				<img class="img-responsive" id="imgOr" src="<c:url value="/images/oris_logo.png"/>" /></a>
 			</h3>
 			<%@include file="homeNav.jsp"%>
 		</div>
+</div>
 		<br>
 		
 		<div class="container">
@@ -39,7 +60,7 @@
 				<c:forEach items="${page.content}" var="obj" varStatus="index">
 					<div class="col-md-6">
 						<div id="content"><br>
-							<section class="col-md-8 col-md-offset-2">
+							<section class="col-md-5 col-md-offset-3">
 								<div class="educators-picture">
 									<c:choose>
 										<c:when test="${empty obj.contentType}">

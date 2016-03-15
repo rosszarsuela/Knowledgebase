@@ -96,15 +96,14 @@
 					height: 60% !important;
 					border: 2px solid white !important;
 					box-shadow: 0 1px 1px 1px #CCC;
-					margin: 0 0 0 40px !important;
+					margin: 0 0 0 30px !important;
 				}
 				.Call img 
 				{
-					width: 300px !important;
+					width: 280px !important;
 					height: 203px !important;
 					position: relative;
-					padding: 0 0 0 20px !important;
-					left:30px !important;
+					left:35px !important;
 				}
 				.Corporate
 				{
@@ -112,21 +111,27 @@
 					height: 70% !important;
 					border: 2px solid white !important;
 					box-shadow: 0 1px 1px 1px #CCC;
-					margin: 0 0 0 40px !important;
+					margin: 0 0 0 30px !important;
 				}
 				.Corporate img 
 				{
-					width: 300px !important;
+					width: 280px !important;
 					height: 203px !important;
 					position: relative;
-					padding: 0 0 0 20px !important;
 					left:30px !important;
 				}
-	#imgOr {
-	    margin: auto;
-   		width: 30%;
-   		padding-bottom: 9px;
-		}
+				#header{
+					padding:.5em 0 0 0 !important;
+				}	
+				#header >h3{
+					margin-bottom: .6em !important;
+				}
+				#imgOr {
+	   				margin: auto !important;
+   					width: 30% !important;
+   					padding-bottom: 3px !important;
+   				}
+		
 </style>
 
 
@@ -136,7 +141,7 @@
 			<!-- Logo -->
 			<h3>
 				<a href="<c:url value="/web/home"/>" id="logo">
-				<img class="img-responsive" id ="imgOr" src="<c:url value="/images/oris_logo.png"/>" />
+				<img class="img-responsive" id="imgOr" src="<c:url value="/images/oris_logo.png"/>" /></a>
 			</h3>
 			<%@include file="homeNav.jsp"%>
 		</div>
@@ -147,8 +152,7 @@
 			<div class="Write col-sm-4 col-md-4">
 				<img class="img-responsive" src="<c:url value="/images/Write Us_7408.jpg"/>" />
 					<h1>Write Us</h1>
-						<p>Read to Us through mail</p>
-						<a class="button" href="<c:url value="/web/view/contact/form"/>">Register for Event</a>
+						<p>Read to us through mail</p>
 							<a href="<c:url value="/web/view/contact/form"/>">See more</a>
 			</div>
 			
@@ -156,7 +160,7 @@
 				<img class="img-responsive" src="<c:url value="/images/Call Us_7482.jpg"/>" />
 					<h1>Call Us</h1>
 						<p>We are here to help you!</p>
-						<a href="<c:url value="#"/>">See more</a>
+						<a href="<c:url value="/web/view/contact/callUs"/>">See more</a>
 							<!-- <a href="/Oris/web/view/common/callUs.jsp">Link</a> -->
 			</div>
 			
@@ -164,7 +168,7 @@
 				<img class="img-responsive" src="<c:url value="/images/Corporate Office_160216.jpg"/>" />
 					<h1>Corporate Office</h1>
 						<p>You can contact us</p>
-							<a href="contactForm.jsp">See more</a>
+							<a href="<c:url value="/web/view/contact/corporateOffice"/>">See more</a>
 			</div> <br><br>
 	</div>
 

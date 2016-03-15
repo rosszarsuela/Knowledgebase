@@ -14,7 +14,6 @@ public abstract class EmailTemplate implements MessageTemplate {
 	private static final long serialVersionUID = 9004230446439743815L;
 
 	protected String from;
-	protected String[] fromCi;
 
     protected String[] to;
     protected String[] cc;
@@ -34,7 +33,6 @@ public abstract class EmailTemplate implements MessageTemplate {
     protected String[] attachmentsPath;
     protected String attachmentsPathAsDelimStr;
     private byte[] picture;
-    private String emailTo;
 
     protected String senderName;
 
@@ -57,23 +55,6 @@ public abstract class EmailTemplate implements MessageTemplate {
 
     public void setFrom(String from) {
         this.from = from;
-    }
-    
-    public String[] getFromCi() {
-        return fromCi;
-    }
-
-    public void setFromCi(String[] fromCi) {
-        this.fromCi = fromCi;
-    }
-    
-    
-    public String getEmailTo() {
-        return emailTo;
-    }
-
-    public void setEmailTo(String emailTo) {
-        this.emailTo = emailTo;
     }
 
     public String[] getTo() {

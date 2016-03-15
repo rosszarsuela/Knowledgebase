@@ -77,11 +77,18 @@ $(document).ready(function() {
 });
 </script>
 <style>
+	#header {
+		padding: 0.9em 0 0 0 !important;	
+	}
+	#header >h3{
+		margin-bottom: -0.9em !important;
+		margin-left: 8em !important;
+	}
 	#imgOr {
-	    margin: auto;
-   		width: 30%;
-   		padding-bottom: 9px;
-		}
+	    margin: auto !important; 
+   		width: 30% !important;
+   		padding-bottom: 3px !important;
+	}
 </style>
 
 
@@ -91,7 +98,8 @@ $(document).ready(function() {
 			<!-- Logo -->
 			<h3>
 				<a href="<c:url value="/web/home"/>" id="logo">
-				<img class="img-responsive" id ="imgOr" src="<c:url value="/images/oris_logo.png"/>" /></a>
+				<img class="img-responsive" id ="imgOr" src="<c:url value="/images/oris_logo.png"/>" />
+			</a>
 			</h3><br>
 			<%@include file="../mis/misNav.jsp"%>
 		</div>
@@ -199,6 +207,11 @@ $(document).ready(function() {
                 <label class="control-label">Description</label>
                 <form:textarea path="description" cssClass="form-control"  rows="5"></form:textarea>
             </div>
+            
+            <div class="form-group control-label">
+                <label class="control-label">Manual Name</label>
+                <form:input path="manualName" cssClass="form-control"/>
+	       	</div>
 	       
 	       <div class="form-group control-label">
                 <label class="control-label">Website</label>

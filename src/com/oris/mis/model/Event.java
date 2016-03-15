@@ -46,6 +46,7 @@ public class Event implements Serializable {
 	private Users updatedBy;
 	private Date updatedDate;
 	private List<Speaker> speakers;
+	private Brand brand;
 
 	// params
 	private Integer begin;
@@ -210,6 +211,16 @@ public class Event implements Serializable {
 
 	public void setSpeakers(List<Speaker> speakers) {
 		this.speakers = speakers;
+	}
+	
+	@OneToOne(fetch = FetchType.EAGER, targetEntity = Brand.class)
+	@JoinColumn(name = "BRAND_ID_FK")
+	public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
 	
 	@Transient

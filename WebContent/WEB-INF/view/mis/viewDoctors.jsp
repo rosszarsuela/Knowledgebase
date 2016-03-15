@@ -1,13 +1,29 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="../common/taglibs.jsp"%>
 
+<style>
+	#header {
+		padding: 0.9em 0 0 0 !important;	
+	}
+	#header >h3{
+		margin-bottom: -0.9em !important;
+		margin-left: 8em !important;
+	}
+	#imgOr {
+	    margin: auto !important; 
+   		width: 30% !important;
+   		padding-bottom: 3px !important;
+	}
+</style>
+
 <div id="page-wrapper">
 		<!-- Header -->
 		<div id="header">
 			<!-- Logo -->
 			<h3>
 				<a href="<c:url value="/web/home"/>" id="logo">
-				<font face="Arial"><b>ORIS Oral Implant Solutions Inc</b></font></a>
+				<img class="img-responsive" id ="imgOr" src="<c:url value="/images/oris_logo.png"/>" />
+			</a>
 			</h3><br>
 			<%@include file="../mis/misNav.jsp"%>
 		</div>
@@ -25,14 +41,7 @@
 		<div class="form-group">
 			<div class="col-lg-8">
 				<a class="btn btn-primary" href="<c:url value="/web/secured/admin/doctor/form"/>">CREATE DOCTOR</a>
-				<%-- <a class="btn btn-primary" href="<c:url value="/web/secured/admin/doctor/pdf">
-					<c:if test="${not empty doctorCommand.lastName}">
-						<c:param name="username" value="${doctorCommand.lastName}" />
-					</c:if>
-					<c:param name="orderBy" value="${doctorCommand.orderBy}"/>
-					<c:param name="sortBy" value="${doctorCommand.sortBy}"/>
-				</c:url>">GENERATE PDF</a> --%>
-	    	</div>
+			</div>
 	    </div>
 	<br>
     </form:form>
@@ -102,27 +111,6 @@
 									</c:if>
 									<c:param name="begin" value="${page.currentPage}" />
 									<c:param name="orderBy" value="d.firstName"/>
-									<c:param name="sortBy" value="desc"/>
-								</c:url>" > <img src="<c:url value="/images/down.png"/>" height="10px" width="10px" title="Desc">
-							</a>
-						</th>
-						<th>
-							<a href="<c:url value="/web/secured/admin/doctor/view">
-									<c:if test="${not empty doctorCommand.lastName}">
-										<c:param name="search" value="${doctorCommand.lastName}" />
-									</c:if>
-									<c:param name="begin" value="${page.currentPage}" />
-									<c:param name="orderBy" value="d.address"/>
-									<c:param name="sortBy" value="asc"/>
-								</c:url>" > <img src="<c:url value="/images/up.png"/>" height="10px" width="10px" title="Asc">
-							</a>
-							Address
-							<a href="<c:url value="/web/secured/admin/doctor/view">
-									<c:if test="${not empty doctorCommand.lastName}">
-										<c:param name="search" value="${doctorCommand.lastName}" />
-									</c:if>
-									<c:param name="begin" value="${page.currentPage}" />
-									<c:param name="orderBy" value="d.address"/>
 									<c:param name="sortBy" value="desc"/>
 								</c:url>" > <img src="<c:url value="/images/down.png"/>" height="10px" width="10px" title="Desc">
 							</a>
@@ -209,7 +197,6 @@
 								<td class="td-left">${obj.lastName}</td>
 								<td class="td-leftr">${obj.middleName}</td>
 								<td class="td-left">${obj.firstName}</td>
-								<td class="td-left">${obj.address}</td>
 								<td class="td-left">${obj.contactNo}</td>
 								<td class="td-left">${obj.email}</td>
 								<td class="td-center">${obj.statusDesc}</td>

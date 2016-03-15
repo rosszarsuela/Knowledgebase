@@ -24,7 +24,6 @@ import com.oris.mis.model.Brand;
 import com.oris.mis.model.Product;
 import com.oris.mis.model.ProductImages;
 import com.oris.mis.model.SolutionsCategory;
-import com.oris.mis.model.Speaker;
 import com.oris.mis.model.Specifications;
 import com.oris.mis.service.MISService;
 import com.oris.util.InventoryUtility;
@@ -81,7 +80,7 @@ public class ProductsController extends BaseController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/edit", method=RequestMethod.GET)
-	public String editSupplier(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+	public String editSupplier(HttpServletRequest request, ModelMap model) {
 		Long id = Long.parseLong(request.getParameter("id"));
 		Product product = misService.get(Product.class, id);
 		
@@ -93,9 +92,10 @@ public class ProductsController extends BaseController {
 		map.put("isDeleted", false);
 		product.setProductImages((List<ProductImages>)misService.getAllByHashMap(ProductImages.class, map));
 		
-		model.addAttribute("productCommand", product);
+		model.addAttribute("status", initStatus());
 		model.addAttribute("categoryList", getSolutionsCategory());
 		model.addAttribute("brandsList", getBrands());
+		model.addAttribute("productCommand", product);
 		return ADD_EDIT_PRODUCT;
 	}
 	
@@ -125,6 +125,7 @@ public class ProductsController extends BaseController {
 	public String registrationForm(@ModelAttribute("productCommand") final Product product, ModelMap model) {
 		model.addAttribute("categoryList", getSolutionsCategory());
 		model.addAttribute("brandsList", getBrands());
+		model.addAttribute("status", initStatus());
 		return ADD_EDIT_PRODUCT;
 	}
 	

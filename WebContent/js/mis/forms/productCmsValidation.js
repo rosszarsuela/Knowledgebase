@@ -1,9 +1,7 @@
-/**
- * 
- */
+
 $(document).ready(function() {
 		$('.removeButton').on('click', function() {
-	    	$(this).parents('div.speaker').remove();
+	    	$(this).parents('div.specifications').remove();
 	    	initSpeaker();
 	    });
 		
@@ -20,12 +18,12 @@ $(document).ready(function() {
 	            $templateEle = $('#' + template + 'Template'),
 	            $row         = $templateEle.clone().removeAttr('id').insertBefore($templateEle).removeClass('hide'),
 	            $el          = $row.find('input').eq(0).attr('name', template + '[]');
-	        $('#event_form').formValidation('addField', $el);
+	        $('#product_form').formValidation('addField', $el);
 	        
 	        initSpeaker();
 	        
 	    	$row.on('click', '.removeButton', function(e) {
-	            $('#event_form').formValidation('removeField', $el);
+	            $('#product_form').formValidation('removeField', $el);
 	            $row.remove();
 	            initSpeaker();
 	        });
@@ -33,11 +31,11 @@ $(document).ready(function() {
 	    
 	    function initSpeaker() {
 	    	var ctr = 0;
-	    	$('.speaker').each(function(i) {
+	    	$('.specifications').each(function(i) {
 	    		ctr++;
 	    	});
 	    	
-	    	$('.speaker').each(function(i) {
+	    	$('.specifications').each(function(i) {
 	    		if(i < (ctr-1) ) {
 	    			$(this).find('.specs-id').attr('name','specs['+i+'].id');
 	        		$(this).find('.specs-specification').attr('name','specs['+i+'].specification');
@@ -62,15 +60,6 @@ $(document).ready(function() {
 	                    }
 	                }
 	            },
-	            
-	            description: {
-	                validators: {
-	                    notEmpty: {
-	                        message: 'Set Product Description.'
-	                    }
-	                }
-	            },
-	          
 	            color: {
 	                validators: {
 	                    color: {
@@ -140,7 +129,7 @@ $(document).ready(function() {
 		$(document).on('change', '.productImages', function() {
 			var img_value2 = $('.img2').val();
 			$('#images-table').find('tbody').find('tr').each(function(){
-				var _this = $(this).find('.productImages').val().split('\\').pop();
+				var_this = $(this).find('.productImages').val().split('\\').pop();
 				var img_value = $(this).find('.img1').val();
 				if(img_value2 == img_value) {
 					check++;
@@ -164,16 +153,15 @@ $(document).ready(function() {
 		
 		$('#images-table').find('tbody').find('tr').find('.view-image').click(function(){
 			var id = $(this).prev().val();
-			var header = $(this).parent().prev().prev().find('input').val();
-			header = header.toUpperCase();
-			getImageById(id,header);
+			getImageById(id);
 		});
 		
-		function getImageById(id,header) {
+		function getImageById(id) {
 			productDWRService.getImageById(id, function(data){
 				$('.modal-header').empty();
-				$('.modal-header').append("<b>"+header+"</b>");
-				$('.img-responsive').attr('src', data.imageContent);
+				$('.modal-header').append("<b>"+data.imgDesc+"</b>");
+				/*alert(data.imageContent);*/
+				$('.modal-body .img-responsive').attr('src', data.imageContent);
 				$('#imagemodal').modal('show');
 			});
 		}

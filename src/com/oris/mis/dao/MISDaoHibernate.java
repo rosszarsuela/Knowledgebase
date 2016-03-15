@@ -211,6 +211,10 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		StringBuffer hqlQueryCount = new StringBuffer("select count(*) from Doctor d where 1=1 ");
 		StringBuffer hqlQuery = new StringBuffer("from Doctor d where 1=1 ");
 		
+		if(!InventoryUtility.isNull(doctor.getId())) {
+			dynamicSql.append("and d.id = :id ");
+		}
+		
 		if(!InventoryUtility.isNull(doctor.getStatus())) {
 			dynamicSql.append("and d.status = :status ");
 		}
@@ -227,6 +231,11 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		
 		Query query = getSession().createQuery(sql);
 		Query queryCount = getSession().createQuery(sqlCount);
+		
+		if(!InventoryUtility.isNull(doctor.getId())) {
+			query.setParameter("id", doctor.getId());
+			queryCount.setParameter("id", doctor.getId());
+		}
 		
 		if(!InventoryUtility.isNull(doctor.getStatus())) {
 			query.setParameter("status", doctor.getStatus());
@@ -280,9 +289,9 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		
 		//Generate sqlCount query
 		StringBuffer hqlQueryCount = new StringBuffer("select count(*) from Product p " + "inner join p.brand b " +
-													  "inner join p.category sc inner join sc.solution s " + "inner join p.specs " + "where 1=1 ");
+													  "inner join p.category sc inner join sc.solution s " + "left join p.specs " + "where 1=1 ");
 		
-		StringBuffer hqlQuery = new StringBuffer("from Product p " + "inner join fetch p.brand b " + "inner join fetch p.category sc inner join fetch sc.solution s " + "where 1=1 ");
+		StringBuffer hqlQuery = new StringBuffer("from Product p " + "inner join fetch p.brand b " + "inner join fetch p.category sc inner join fetch sc.solution s " + "left join fetch p.specs " + "where 1=1 ");
 		
 		if(!InventoryUtility.isNull(product.getCategory()) && !InventoryUtility.isNull(product.getCategory().getSolution().getId())) {
 			dynamicSql.append("and s.id = :solutionId ");
@@ -298,6 +307,10 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		
 		if(StringUtils.isNotEmpty(product.getName())) {
 			dynamicSql.append("and lower(p.name) like lower(:search) ");
+		}
+		
+		if(!InventoryUtility.isNull(product.getStatus())) {
+			dynamicSql.append("and p.status =:status ");
 		}
 		
 		if(StringUtils.isNotEmpty(product.getOrderBy())) {
@@ -331,6 +344,11 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		if(StringUtils.isNotEmpty(product.getName())) {
 			query.setParameter("search", "%"+product.getName()+"%");
 			queryCount.setParameter("search", "%"+product.getName()+"%");
+		}
+		
+		if(!InventoryUtility.isNull(product.getStatus())) {
+			query.setParameter("status", product.getStatus());
+			queryCount.setParameter("status", product.getStatus());
 		}
 
 		if(!InventoryUtility.isNull(product.getBegin())) {
@@ -402,8 +420,8 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		StringBuffer dynamicSql = new StringBuffer();
 		
 		//Generate sqlCount query
-		StringBuffer hqlQueryCount = new StringBuffer("select count(*) from Event e left join e.speakers where 1=1 ");
-		StringBuffer hqlQuery = new StringBuffer("from Event e left join fetch e.speakers where 1=1 ");
+		StringBuffer hqlQueryCount = new StringBuffer("select count(*) from Event e left join e.speakers inner join e.brand b where 1=1 ");
+		StringBuffer hqlQuery = new StringBuffer("from Event e left join fetch e.speakers inner join fetch e.brand where 1=1 ");
 		
 		if(StringUtils.isNotEmpty(event.getName())) {
 			dynamicSql.append("and lower(e.name) like lower(:search) ");
@@ -425,6 +443,7 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		
 		Query query = getSession().createQuery(sql);
 		Query queryCount = getSession().createQuery(sqlCount);
+		
 		if(StringUtils.isNotEmpty(event.getName())) {
 			query.setParameter("search", "%"+event.getName()+"%");
 			queryCount.setParameter("search", "%"+event.getName()+"%");

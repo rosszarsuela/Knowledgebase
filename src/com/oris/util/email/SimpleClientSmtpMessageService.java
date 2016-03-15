@@ -3,13 +3,13 @@ package com.oris.util.email;
 import java.util.Date;
 import java.util.Properties;
 
-import javax.activation.DataHandler;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
@@ -20,7 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.oris.util.CollectionsUtil;
-import com.oris.util.email.template.EmailTemplate;
+import com.oris.util.email.template.ClientEmailTemplate;
 import com.oris.util.email.template.MessageTemplate;
 
 /**
@@ -31,26 +31,26 @@ import com.oris.util.email.template.MessageTemplate;
 
 public class SimpleClientSmtpMessageService implements MessageService {
 
-    protected SimpleSmtpServiceConfig config;
+    protected SimpleClientSmtpServiceConfig config;
     
     public static final String SENDER_NAME = "Oris Dental";
 
     private final transient Logger log = LoggerFactory.getLogger(SimpleClientSmtpMessageService.class);
 
     public SimpleClientSmtpMessageService() {
-        this(new SimpleSmtpServiceConfig());
+        this(new SimpleClientSmtpServiceConfig());
     }
 
 
-    public SimpleClientSmtpMessageService(SimpleSmtpServiceConfig config) {
+    public SimpleClientSmtpMessageService(SimpleClientSmtpServiceConfig config) {
         setConfig(config);
     }
 
     public void setConfig(ServiceConfig config) {
-        if (!(config instanceof SimpleSmtpServiceConfig)) {
-            throw new IllegalArgumentException("Parameter config must be of type: " + SimpleSmtpServiceConfig.class);
+        if (!(config instanceof SimpleClientSmtpServiceConfig)) {
+            throw new IllegalArgumentException("Parameter config must be of type: " + SimpleClientSmtpServiceConfig.class);
         }
-        this.config = (SimpleSmtpServiceConfig) config;
+        this.config = (SimpleClientSmtpServiceConfig) config;
     }
 
     public ServiceConfig getConfig() {
@@ -64,11 +64,11 @@ public class SimpleClientSmtpMessageService implements MessageService {
             return;
         }
 
-        if (!(msg instanceof EmailTemplate)) {
-            throw new IllegalArgumentException("Message template must be an instance of EmailTemplate. Found: " + msg.getClass());
+        if (!(msg instanceof ClientEmailTemplate)) {
+            throw new IllegalArgumentException("Message template must be an instance of ClientEmailTemplate. Found: " + msg.getClass());
         }
 
-        EmailTemplate emailMsg = (EmailTemplate) msg;
+        ClientEmailTemplate emailMsg = (ClientEmailTemplate) msg;
 
         StopWatch stopWatch = null;
         if (log.isDebugEnabled()) {
@@ -78,7 +78,7 @@ public class SimpleClientSmtpMessageService implements MessageService {
         }
 
         try {
-            Session mailSession = Session.getDefaultInstance(toMailProps((SimpleSmtpServiceConfig) getConfig()),null);
+            Session mailSession = Session.getDefaultInstance(toMailProps((SimpleClientSmtpServiceConfig) getConfig()),null);
             Transport transport = mailSession.getTransport();
             
             MimeMessage mimeMsg = toMimeMessage(new MimeMessage(mailSession), emailMsg);
@@ -99,14 +99,14 @@ public class SimpleClientSmtpMessageService implements MessageService {
                 log.debug("Finish sending email message: msg=" + msg + "; stopWatch: " + stopWatch.getTime());
             }
         } catch (Exception e) {
-            log.warn("Failed to send email mesasge. emailTemplate" + msg, e);
+            log.warn("Failed to send email mesasge. clientEmailTemplate" + msg, e);
             throw new MessageServiceException("Failed to send email message", e, emailMsg.getTo());
         }
     }
 
-    protected Properties toMailProps(SimpleSmtpServiceConfig config) {
+    protected Properties toMailProps(SimpleClientSmtpServiceConfig config) {
         if (log.isDebugEnabled()) {
-            log.debug("Using SimpleSmtpServiceConfig: " + config);
+            log.debug("Using SimpleClientSmtpServiceConfig: " + config);
         }
 
         String protocol = config.getProtocol();
@@ -135,7 +135,7 @@ public class SimpleClientSmtpMessageService implements MessageService {
         return p;
     }
 
-    protected MimeMessage toMimeMessage(MimeMessage msg, EmailTemplate msgTemplate) {
+    protected MimeMessage toMimeMessage(MimeMessage msg, ClientEmailTemplate msgTemplate) {
         try {
             msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
             msg.setHeader("Message-ID", MailUtil.genMsgId(null));
@@ -146,8 +146,19 @@ public class SimpleClientSmtpMessageService implements MessageService {
             msg.setFrom(MailUtil.toInetAddress(msgTemplate.getFrom(), senderName));
             
             msg.setSender(MailUtil.toInetAddress(msgTemplate.getFrom()));
-            msg.setRecipients(Message.RecipientType.TO, MailUtil.toInetAddresses(msgTemplate.fetchTo()));
-            msg.setRecipients(Message.RecipientType.CC, MailUtil.toInetAddresses(msgTemplate.fetchCc()));
+            
+//          === Work around to send to Oris email and sample other user ===
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("devism41l@gmail.com"));
+            msg.addRecipients(Message.RecipientType.TO, MailUtil.toInetAddresses(msgTemplate.fetchTo()));
+            msg.addRecipients(Message.RecipientType.CC, InternetAddress.parse("13karasulucian@gmail.com"));
+            
+//            ==== Array to set CC/ BCC emails ====
+//            String address = "zoidron_21@hotmailcom, 13karasulucian@gmail.com";
+//            InternetAddress[] ccAddresses = InternetAddress.parse(address);
+//            msg.setRecipients(Message.RecipientType.CC, ccAddresses);
+           
+//            msg.setRecipients(Message.RecipientType.TO, MailUtil.toInetAddresses(msgTemplate.fetchTo()));
+//            msg.setRecipients(Message.RecipientType.CC, MailUtil.toInetAddresses(msgTemplate.fetchCc()));
             msg.setRecipients(Message.RecipientType.BCC, MailUtil.toInetAddresses(msgTemplate.fetchBcc()));
             msg.setReplyTo(MailUtil.toInetAddresses(msgTemplate.getReplyTo()));
             msg.setSubject(msgTemplate.getSubject());
@@ -157,21 +168,12 @@ public class SimpleClientSmtpMessageService implements MessageService {
             BodyPart msgBody = new MimeBodyPart();
             msgBody.setText(msgTemplate.fetchBody());
             
-//            if (msgTemplate.isHtmlFormat()) {
-//            	msgBody.setContent(msgTemplate.fetchBody(), MailUtil.TEXT_HTML);
-//            } else {
-//            	msgBody.setContent(msgTemplate.fetchBody(), MailUtil.TEXT_PLAIN);
-//            }            
-            mp.addBodyPart(msgBody);
+            if (msgTemplate.isHtmlFormat()) {
+            	msgBody.setContent(msgTemplate.fetchBody(), MailUtil.TEXT_HTML);
+            } else {
+            	msgBody.setContent(msgTemplate.fetchBody(), MailUtil.TEXT_PLAIN);
+            }            
             
-            msgBody = new MimeBodyPart();
-            
-//            String filename = "C:\\sample.jpg";
-//            DataSource source = new FileDataSource(filename);
-//            msgBody.setDataHandler(new DataHandler(source));
-            msgBody.setDataHandler(new DataHandler(msgTemplate.getDataSource()));
-            msgBody.setFileName("deposit.jpg");
-            msgBody.setHeader("Content-ID", "image_id");
             mp.addBodyPart(msgBody);
             msg.setContent(mp);
             msg.saveChanges();
@@ -179,7 +181,7 @@ public class SimpleClientSmtpMessageService implements MessageService {
             return msg;
 
         } catch (MessagingException e) {
-            log.warn("Failed to create mime message from email template. emailTemplate" + msgTemplate, e);
+            log.warn("Failed to create mime message from email template. clientEmailTemplate" + msgTemplate, e);
             return null;
         }
     }

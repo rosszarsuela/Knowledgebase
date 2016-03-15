@@ -56,15 +56,33 @@
 
 
 	<style>
-		h1,h2,h3 {
-		 	 margin-top:10px;
-		 	 margin-bottom:30px;
-			}
-			
+		
+		label {
+			text-align: left !important;
+		}
+		
 		div.center{
 			margin-right:-50%;
 			margin-left: 50%;
 		}
+		#imgOr {
+	    margin: auto;
+   		width: 30%;
+   		padding-bottom: 3px;
+		}
+		h1, h2, h3 {
+			margin-top:10px;
+			margin-bottom:10px;
+		}
+		
+		#header > h3 {
+			margin-bottom:.6em !important;
+		}
+		
+		#header {
+			padding:1em 0 0 0;
+		}
+		
 	</style>
 	
 	
@@ -74,8 +92,10 @@
 			<!-- Logo -->
 			<h3>
 				<a href="<c:url value="/web/home"/>" id="logo">
-				<font face="Arial"><b>ORIS Oral Implant Solutions Inc</b></font></a>
-			</h3><%@include file="../mis/misNav.jsp"%>
+				<img class="img-responsive" id ="imgOr" src="<c:url value="/images/oris_logo.png"/>" />
+			</a>
+			</h3><br>
+			<%@include file="../mis/misNav.jsp"%>
 		</div>
 </div>
 
@@ -171,6 +191,13 @@
 				      <form:input path="slot" cssClass="form-control" />
 				</div>
 			</div>
+			
+		 	<div class="form-group">
+		 		<div class="col-md-12 col-xs-12 col-sm-12">
+	                <label class="control-label">Brand</label>
+	                <form:select path="brand.id" items="${brandsList}" itemLabel="name" itemValue="id" cssClass="form-control"/>
+                </div>
+            </div>
 			
 			<div class="form-group">
 		        <div class="col-md-12 col-xs-12 col-sm-12">

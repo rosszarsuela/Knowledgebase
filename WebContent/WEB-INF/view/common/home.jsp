@@ -23,15 +23,21 @@
 		margin-bottom: 0% !important;
 		}
 		
-	h1,h2,h3 {
+	h1,h2 {
 	 	 margin-top:10px;
 	 	 margin-bottom: 10px;
 		}
-		
+	#header{
+		padding: 1em 0 0 0 !important;	
+	}
+	#header >h3{
+		margin-bottom: .6em !important;
+	}
 	#imgOr {
-	    margin: auto;
-   		width: 30%;
-		}
+	    margin: auto !important; 
+   		width: 30% !important;
+   		padding-bottom: 3px !important;
+	}
 </style>
 
 
@@ -41,8 +47,8 @@
 			<!-- Logo -->
 			<h3>
 				<a href="<c:url value="/web/home"/>" id="logo">
-				<img class="img-responsive" id ="imgOr" src="<c:url value="/images/oris_logo.png"/>" />
-			</h3><br>
+				<img class="img-responsive" id="imgOr" src="<c:url value="/images/oris_logo.png"/>" /></a>
+			</h3>
 			<%@include file="homeNav.jsp"%>
 		</div>
 </div>

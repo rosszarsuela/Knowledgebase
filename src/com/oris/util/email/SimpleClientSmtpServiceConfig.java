@@ -107,7 +107,7 @@ public class SimpleClientSmtpServiceConfig implements ServiceConfig {
 
 	@Override
     public String toString() {
-        return "SimpleSmtpServiceConfig{"
+        return "SimpleClientSmtpServiceConfig{"
             + "protocol='" + protocol + "'"
             + ", host='" + host + "'"
             + ", port=" + port

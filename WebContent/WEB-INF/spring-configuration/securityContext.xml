@@ -26,6 +26,7 @@
         <sec:intercept-url pattern="/web/home*" filters="none"/>
         <sec:intercept-url pattern="/web/about*" filters="none"/>
         <sec:intercept-url pattern="/web/contact*" filters="none"/>
+        <sec:intercept-url pattern="/web/testimonials*" filters="none"/>
         <sec:intercept-url pattern="/web/view/**" filters="none"/>
         <sec:intercept-url pattern="/web/cms/login*" filters="none"/>
         <sec:intercept-url pattern="/web/downloadPdf*" filters="none"/>

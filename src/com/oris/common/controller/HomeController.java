@@ -29,12 +29,7 @@ public class HomeController extends BaseController {
 	
 	//Services
 	@Autowired private MISService misService;
-	
-	//Variables
-	private Integer begin;
-	private String orderBy;
-	private String sortBy;
-	
+
 	@ExceptionHandler
 	@ResponseStatus(value=HttpStatus.NOT_FOUND)
 	public String notFoundEceptionHandler(ModelMap map) {

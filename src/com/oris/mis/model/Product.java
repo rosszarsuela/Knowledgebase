@@ -34,6 +34,7 @@ public class Product implements Serializable {
 	private Brand brand;
 	private String name;
 	private String description;
+	private String remarks;
 	private CommonsMultipartFile image;
 	private String contentType;
 	private byte[] picture;
@@ -46,6 +47,7 @@ public class Product implements Serializable {
 	private Users updatedBy;
 	private Date updatedDate;
 	private List<Specifications> specs;
+/*	private Event event;*/
 	
 
 	// params
@@ -55,14 +57,14 @@ public class Product implements Serializable {
 	private String orderBy;
 	private String sortBy;
 	
-	/*public Product() {
+	public Product() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	public Product(Long id) {
 		this.id = id;
 	}
-*/
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PRODUCT_ID_PK")
@@ -92,6 +94,25 @@ public class Product implements Serializable {
 
 	public void setBrand(Brand brand) {
 		this.brand = brand;
+	}
+	
+	/*@OneToOne(fetch = FetchType.EAGER, targetEntity = Event.class)
+	@JoinColumn(name = "EVENT_ID_FK")
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}*/
+	
+	@Column(name = "REMARKS")
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 
 	@Column(name = "NAME")
@@ -134,7 +155,7 @@ public class Product implements Serializable {
 	public String getImageContent() {
 		return "data:"+getContentType()+";base64," + Base64.encode(getPicture());
 	}
-	
+	 
 	@Transient
 	public String getPdfContent() {
 		return "data:"+getContentType()+";base64," + Base64.encode(getManual());

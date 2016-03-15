@@ -40,6 +40,7 @@ public class Brand implements Serializable {
 	private CommonsMultipartFile pdfimage;
 	private byte[] pimage;
 	private String description;
+	private String manualName;
 	private Users createdBy;
 	private Date createdDate;
 	private Users updatedBy;
@@ -86,6 +87,15 @@ public class Brand implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	@Column(name = "MANUAL_NAME")
+	public String getManualName() {
+		return manualName;
+	}
+
+	public void setManualName(String manualName) {
+		this.manualName = manualName;
 	}
 
 	@OneToOne(fetch = FetchType.EAGER, targetEntity = Users.class)

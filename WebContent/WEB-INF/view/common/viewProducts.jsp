@@ -189,7 +189,7 @@ span.row-label {
 
 .layout {
 	position: relative;
-	top: 50px;
+	top: 53px;
 	right: -20px;
 }
 
@@ -668,7 +668,7 @@ span.row-label {
 											</h3>
 											<p class="text-justify" style="white-space: pre-wrap;">${product.description}</p>
 
-											<c:if test="${not empty product.manual}">
+											<c:if test="${not empty product.manualContentType}">
 												<c:choose>
 													<c:when test="${brand eq 'Dexcowin'}">
 														<div id="manual-dex">
@@ -682,15 +682,11 @@ span.row-label {
 													</c:otherwise>
 												</c:choose>
 												<p>
-
-													<img width="15%"
-														src="<c:out value="${product.brand.pimageContent}"/>">
-													<a
-														href="<c:url value="/web/view/manualPdf">
-								            			<c:param name="id" value="${product.id}"/>
-								   							</c:url>"><img
-														src="<c:url value="/images/icon/icon_pdf.png"/>"
-														width="6%"> </a>
+													<a href="<c:url value="/web/view/manualPdf">
+								            				<c:param name="id" value="${product.id}"/>
+								   							</c:url>">
+								   						<img width="15%" src="<c:out value="${product.brand.pimageContent}"/>">
+													</a>
 											</c:if>
 											&emsp;&emsp;
 
@@ -730,13 +726,9 @@ span.row-label {
 													</c:otherwise>
 												</c:choose>
 												
-												<img width="15%"
-													src="<c:out value="${product.brand.pimageContent}"/>">
-												<a
-													href="<c:url value="/web/view/manualPdf">
-								            			<c:param name="id" value="${product.id}"/>
-								   							</c:url>"><img
-													src="<c:url value="/images/icon/icon_pdf.png"/>" width="6%">
+												<a href="<c:url value="/web/view/manualPdf">
+								            		<c:param name="id" value="${product.id}"/>
+								   					</c:url>"><img width="15%" src="<c:out value="${product.brand.pimageContent}"/>">
 												</a>
 											</c:if>&emsp;&emsp;
 											<br>
@@ -799,15 +791,11 @@ span.row-label {
 														style="white-space: pre-wrap; margin-bottom: 175px;">${product.brand.description}</p>
 
 													<c:if test="${not empty product.manual}">
-
-														<img width="15%" id="manual-pdf"
+														<a href="<c:url value="/web/view/manualPdf">
+															<c:param name="id" value="${product.id}"/>
+														   	</c:url>"><img width="15%" id="manual-pdf"
 															src="<c:out value="${product.brand.pimageContent}"/>">
-														<a
-															href="<c:url value="/web/view/manualPdf">
-														            			<c:param name="id" value="${product.id}"/>
-														   							</c:url>"><img
-															src="<c:url value="/images/icon/icon_pdf.png"/>"
-															width="6%"> </a>
+														</a>
 
 														<c:choose>
 															<c:when test="${brand eq 'Neobiotech' }">
@@ -866,14 +854,11 @@ span.row-label {
 																</div>
 
 																<p>
-																	<img width="15%"
-																		src="<c:out value="${product.brand.pimageContent}"/>">
-																	<a
-																		href="<c:url value="/web/view/manualPdf">
-														            			<c:param name="id" value="${product.id}"/>
-														   							</c:url>"><img
-																		src="<c:url value="/images/icon/icon_pdf.png"/>"
-																		width="6%"> </a>
+																	<a href="<c:url value="/web/view/manualPdf">
+														            		<c:param name="id" value="${product.id}"/>
+														   				</c:url>">
+														   				<img width="15%" src="<c:out value="${product.brand.pimageContent}"/>">
+																	</a>
 															</c:if>
 															&emsp;&emsp;
 														</div>
@@ -910,6 +895,7 @@ span.row-label {
 										<div class="page-headerProduct-tech">
 											<img class="img-responsive"
 												src="<c:out value="${product.brand.imageContent}"/>" />
+												
 										</div>
 
 										<div class="product-image-tech">
@@ -959,7 +945,16 @@ span.row-label {
 														</tr>
 													</c:forEach>
 												</tbody>
+												<tfoot>
+													<tr>
+														<td>
+														<a href="<c:url value="${product.brand.website}"></c:url>"> Website link: ${product.brand.website}</a>
+														</td>
+													</tr>
+												</tfoot>
 											</table>
+											
+											
 										</div>
 										
 										<div class="button-back">

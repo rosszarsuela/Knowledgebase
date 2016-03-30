@@ -37,6 +37,7 @@ public class Product implements Serializable {
 	private String remarks;
 	private CommonsMultipartFile image;
 	private String contentType;
+	private String manualContentType;
 	private byte[] picture;
 	private CommonsMultipartFile pdf;
 	private byte[] manual;
@@ -141,6 +142,15 @@ public class Product implements Serializable {
 	public void setContentType(String contentType) {
 		this.contentType = contentType;
 	}
+	
+	@Column(name = "MANUAL_CONTENT_TYPE")
+	public String getManualContentType() {
+		return manualContentType;
+	}
+
+	public void setManualContentType(String manualContentType) {
+		this.manualContentType = manualContentType;
+	}
 
 	@Column(name = "PICTURE")
 	public byte[] getPicture() {
@@ -158,7 +168,7 @@ public class Product implements Serializable {
 	 
 	@Transient
 	public String getPdfContent() {
-		return "data:"+getContentType()+";base64," + Base64.encode(getManual());
+		return "data:"+getManualContentType()+";base64," + Base64.encode(getManual());
 	}
 
 	@Column(name ="PDF_MANUAL")

@@ -70,7 +70,7 @@ public class ProductsController extends BaseController {
 			fis.read(bFile);
 			fis.close();
 			
-			product.setContentType(product.getPdf().getContentType());
+			product.setManualContentType(product.getPdf().getContentType());
 			product.setManual(bFile);
 		}
 		

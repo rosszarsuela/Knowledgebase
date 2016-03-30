@@ -16,8 +16,12 @@
 		}
 	
 	.bs-example {
-		margin: 20px;
-		}
+	margin: 20px;
+	}
+		
+	.video-style {
+		padding: 4em 0 0em 0;
+	}
 	
 	.carousel-indicators {
 		margin-bottom: 0% !important;
@@ -188,7 +192,7 @@
 		<header class="major">
 			<h2>Oris Implant Solutions, Inc.</h2>
 			<br/>
-			<p>Helps provide dentists with innovative products, services and solutions related to implant dentistry.</p>
+			<p><strong>Helps provide dentists with innovative products, services and solutions related to implant dentistry, prosthodontics, periodontics, oral surgery.</strong></p>
 		</header>
 	</div>
 </section>
@@ -201,7 +205,7 @@
 				<div class="box post">
 					<img src="<c:url value="/images/solutions/training_solution.jpg"/>" class="image left"/>
 					<div class="inner">
-						<h4>Training</h4>
+						<h4>Trainings</h4>
 						<ul class="inner-list">
 							<li>Implant Training</li>
 							<li>Surgical &amp; Prosthetic</li>
@@ -216,7 +220,7 @@
 				<div class="box post">
 					<img src="<c:url value="/images/solutions/training_solution.jpg"/>" class="image left"/>
 					<div class="inner">
-						<h4>Implant Product</h4>
+						<h4>Implant Products</h4>
 						<ul class="inner-list">
 							<li>Ritter</li>
 							<li>Neobiotech</li>
@@ -231,7 +235,7 @@
 				<div class="box post">
 					<img src="<c:url value="/images/solutions/imaging_solution.jpg"/>" class="image left"/>
 					<div class="inner">
-						<h4>Dental Imaging</h4>
+						<h4>Dental Imaging Systems</h4>
 						<ul class="inner-list">
 							<li>CBCT</li>
 							<li>Pano-Ceph</li>
@@ -260,15 +264,29 @@
 		<div class="rowHome">
 			<section class="col-lg-6 width50-rick">
 				<div class="box post">
-					<img src="<c:url value="/images/solutions/prosthetic_solution.jpg"/>" class="image left"/>
+					<img src="<c:url value="/images/solutions/bone_graft.jpg"/>" class="image left"/>
 					<div class="inner">
-						<h4>Bone Graft &amp; Bone Barrier Solutions</h4>
+						<h4>Bone Graft</h4>
 						<ul class="inner-list">
-							<li>Osteobiol</li>
+							<li>Osteobiol Bone Xenografts</li>
+							<li>Allograft Bone Material</li>
+							<li>BMP - Bone Morphogenetic Protein-2</li>
 						</ul>
 					</div>
 				</div>
 			</section>
+			
+			<section class="col-lg-6 width50-rick">
+				<div class="box post">
+					<img src="<c:url value="/images/solutions/bone_barrier.jpg"/>" class="image left"/>
+					<div class="inner">
+						<h4> Bone Barrier</h4>
+						<ul class="inner-list">
+							<li>Osteobiol Collagen Membrane/Evolution &amp; Lamina</li>
+							<li>Titanium Membrane</li>
+						</ul>
+					</div>
+				</div>
 		</div>
 	</div>
 </section>
@@ -334,7 +352,7 @@
 
 
 	<!-- Highlights -->
-<section class="wrapper style1">
+<section class="wrapper style1 video-style">
 	<div class="container">
 		<div class="row 200%">
 			<section class="4u 12u(narrower)">

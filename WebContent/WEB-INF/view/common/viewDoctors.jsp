@@ -42,23 +42,26 @@
     }
     h3 {
 		font-size: 20px;
+		line-height: 2em;
     	font-weight: bolder;
 		    
     }
     h4 {
-    	margin-bottom: -9px;
-   		font-weight: bolder;
-   		font-size: 20px;
+    	margin-bottom: 0px;
+   		font-weight: 400;
+   		line-height: 1.45em;
+   		font-size: 22px;
     }
-   /*  h6 {
+   
+    h6 {
     margin-bottom: 7%;
-    margin-top: -4%;
-    font-weight: 400;
-    font-size: 15px;
-    } */
+    margin-top: 0%;
+    font-weight: 200;
+    font-size: 17px;
+    } 
     
     div .educ-prof {
-    	 margin-top: 250px;
+    	 margin-top: 80px;
     }
 </style>
 
@@ -129,10 +132,10 @@
 											<h3><c:out value="${obj.profession}"/></h3>
 											
 											<h4 class="text-justify" style="white-space: pre-wrap;"><c:out value="${obj.school1}"/></h4>
-											<%-- <h6><c:out value="${obj.fullCourse1}"/></h6> --%>
+											<h6><c:out value="${obj.fullCourse1}"/></h6>
 											
 											<h4 class="text-justify" style="white-space: pre-wrap;"><c:out value="${obj.school2}"/></h4>
-											<%-- <h6><c:out value="${obj.fullCourse2}"/></h6> --%>
+											<h6><c:out value="${obj.fullCourse2}"/></h6>
 										</div>
 									</div>
 									
@@ -145,10 +148,10 @@
 											<h3><c:out value="${obj.profession}"/></h3>
 											
 											<h4 class="text-justify" style="white-space: pre-wrap;"><c:out value="${obj.school1}"/></h4>
-											<%-- <h6><c:out value="${obj.fullCourse1}"/></h6> --%>
+											<h6><c:out value="${obj.fullCourse1}"/></h6>
 											
 											<h4 class="text-justify" style="white-space: pre-wrap;"><c:out value="${obj.school2}"/></h4>
-											<%-- <h6><c:out value="${obj.fullCourse2}"/></h6> --%>
+											<h6><c:out value="${obj.fullCourse2}"/></h6>
 											
 										</div>
 									</div>

@@ -38,7 +38,7 @@
 		
 		<li id="events"><a href="<c:url value="/web/view/events" />"> TRAINING & EVENTS</a></li>
 		<li id="contact"><a href="<c:url value="/web/contact"/>">CONTACT US</a></li>
-		<li id="testimonials"><a href="<c:url value="/web/testimonials"/>">TESTIMONIALS</a></li>
+		<%-- <li id="testimonials"><a href="<c:url value="/web/testimonials"/>">TESTIMONIALS</a></li> --%>
 	</ul>
 </nav>
 		

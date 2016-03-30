@@ -421,7 +421,8 @@ span.row-label {
 													class="img-responsive"
 													src="<c:out value="${obj.brandContent}"/>" />
 													<div class="row-label">
-														<c:out value="${obj.name}" />
+														<strong><c:out value="${obj.code}" /></strong><br/>
+														<span style="font-size: 15px;"><c:out value="${obj.name}" /></span>
 													</div> </a>
 											</div>
 										</c:forEach>

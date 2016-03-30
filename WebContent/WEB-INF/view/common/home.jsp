@@ -38,6 +38,10 @@
    		width: 30% !important;
    		padding-bottom: 3px !important;
 	}
+	
+	.box.post div h4 {
+		margin-bottom: 0;
+	}
 </style>
 
 
@@ -178,6 +182,96 @@
 		</c:choose>
 	</div>  --%>
 	
+<!-- Gigantic Heading -->
+<section class="wrapper style2">
+	<div class="container">
+		<header class="major">
+			<h2>Oris Implant Solutions, Inc.</h2>
+			<br/>
+			<p>Helps provide dentists with innovative products, services and solutions related to implant dentistry.</p>
+		</header>
+	</div>
+</section>
+
+<!-- Posts -->
+<section class="wrapper style1">
+	<div class="container">
+		<div class="rowHome">
+			<section class="col-lg-6 width50-rick">
+				<div class="box post">
+					<img src="<c:url value="/images/solutions/training_solution.jpg"/>" class="image left"/>
+					<div class="inner">
+						<h4>Training</h4>
+						<ul class="inner-list">
+							<li>Implant Training</li>
+							<li>Surgical &amp; Prosthetic</li>
+							<li>Perio-Pros Seminars</li>
+							<li>CBCT Imaging Workshops</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			
+			<section class="col-lg-6 width50-rick">
+				<div class="box post">
+					<img src="<c:url value="/images/solutions/training_solution.jpg"/>" class="image left"/>
+					<div class="inner">
+						<h4>Implant Product</h4>
+						<ul class="inner-list">
+							<li>Ritter</li>
+							<li>Neobiotech</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</div>
+				
+		<div class="rowHome">
+			<section class="col-lg-6 width50-rick">
+				<div class="box post">
+					<img src="<c:url value="/images/solutions/imaging_solution.jpg"/>" class="image left"/>
+					<div class="inner">
+						<h4>Dental Imaging</h4>
+						<ul class="inner-list">
+							<li>CBCT</li>
+							<li>Pano-Ceph</li>
+							<li>Sensors - Peripheral Digital Sensors</li>
+							<li>Dexcowin Portable</li>
+							<li>Trollbyte</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		
+			<section class="col-lg-6 width50-rick">
+				<div class="box post">
+					<img src="<c:url value="/images/solutions/prosthetic_solution.jpg"/>" class="image left"/>
+					<div class="inner">
+						<h4>Prosthetic Solutions</h4>
+						<ul class="inner-list">
+							<li>Rhein 83 Attachments</li>
+							<li>Mesa - Dental Alloys</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</div>
+		
+		<div class="rowHome">
+			<section class="col-lg-6 width50-rick">
+				<div class="box post">
+					<img src="<c:url value="/images/solutions/prosthetic_solution.jpg"/>" class="image left"/>
+					<div class="inner">
+						<h4>Bone Graft &amp; Bone Barrier Solutions</h4>
+						<ul class="inner-list">
+							<li>Osteobiol</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</section>
 	
 	
 <c:choose>
@@ -274,71 +368,6 @@
 	</div>
 </section>
 
-<!-- Gigantic Heading -->
-<section class="wrapper style2">
-	<div class="container">
-		<header class="major">
-			<h2>A gigantic heading you can use for whatever</h2>
-			<p>With a much smaller subtitle hanging out just below it</p>
-		</header>
-	</div>
-</section>
 
-<!-- Posts -->
-<section class="wrapper style1">
-	<div class="container">
-		<div class="rowHome">
-			<section class="col-lg-6 width50-rick">
-				<div class="box post">
-					<a href="#" class="image left"><img src="<c:url value="/images/pic01.jpg"/>"/></a>
-					<div class="inner">
-						<h3>The First Thing</h3>
-						<p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et
-							dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse
-							eu.</p>
-					</div>
-				</div>
-			</section>
-			
-			<section class="col-lg-6 width50-rick">
-				<div class="box post">
-					<a href="#" class="image left"><img src="<c:url value="/images/pic02.jpg"/>"/></a>
-					<div class="inner">
-						<h3>The Second Thing</h3>
-						<p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et
-							dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse
-							eu.</p>
-					</div>
-				</div>
-			</section>
-		</div>
-		
-		<div class="rowHome">
-			<section class="col-lg-6 width50-rick">
-				<div class="box post">
-					<a href="#" class="image left"><img src="<c:url value="/images/pic03.jpg"/>"/></a>
-					<div class="inner">
-						<h3>The Third Thing</h3>
-						<p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et
-							dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse
-							eu.</p>
-					</div>
-				</div>
-			</section>
-		
-			<section class="col-lg-6 width50-rick">
-				<div class="box post">
-					<a href="#" class="image left"><img src="<c:url value="/images/pic04.jpg"/>"/></a>
-					<div class="inner">
-						<h3>The Fourth Thing</h3>
-						<p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et
-							dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse
-							eu.</p>
-					</div>
-				</div>
-			</section>
-		</div>
-	</div>
-</section>
 
 <%@include file="footer.jsp"%>

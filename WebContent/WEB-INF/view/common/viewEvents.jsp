@@ -29,7 +29,7 @@
 	   	}
 	   	
 	   	body {
-	   		background: #f7f7f7 url("images/bg01.png") !important; 
+	   		background: #f7f7f7 url("../images/bg01.png") !important; 
 	   	}
 </style>
     

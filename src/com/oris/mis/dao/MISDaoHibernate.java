@@ -60,7 +60,8 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		StringBuffer hqlQuery = new StringBuffer("from Users u where 1=1 ");
 		
 		if(StringUtils.isNotEmpty(username)) {
-			dynamicSql.append("and lower(u.username) like lower(:search) or lower(u.firstName) like lower(:search) or lower(u.lastName) like lower(:search) ");
+			dynamicSql.append("and lower(u.username) like lower(:search) or lower(u.firstName) like lower(:search) or lower(u.lastName) like lower(:search)" +
+					" or lower(u.middleName) like lower(:search) or lower(u.email) like lower(:search) ");
 		}
 		
 		if(StringUtils.isNotEmpty(orderBy)) {
@@ -159,7 +160,7 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		
 		if(StringUtils.isNotEmpty(doctor.getSearch())) {
 			dynamicSql.append("and ( lower(d.lastName) like lower(:search) or lower(d.middleName) like lower(:search) " +
-							  "or lower(d.lastName) like lower(:search) or lower(d.address) like lower(:search) ) ");
+							  "or lower(d.firstName) like lower(:search) or lower(d.contactNo) like lower(:search) or lower(d.email) like lower(:search) ) ");
 		}
 		
 		if(!InventoryUtility.isNull(doctor.getStatus())) {
@@ -306,7 +307,8 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		}
 		
 		if(StringUtils.isNotEmpty(product.getName())) {
-			dynamicSql.append("and lower(p.name) like lower(:search) ");
+			dynamicSql.append("and lower(p.name) like lower(:search) or lower(b.name) like lower(:search) or lower(sc.name) like lower(:search)" +
+					" or lower(p.description) like lower(:search) or lower(b.description) like lower(:search) or lower(sc.description) like lower(:search) ");
 		}
 		
 		if(!InventoryUtility.isNull(product.getStatus())) {
@@ -380,7 +382,8 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		StringBuffer hqlQuery = new StringBuffer("from Customer c where 1=1 ");
 		
 		if(StringUtils.isNotEmpty(customer.getName())) {
-			dynamicSql.append("and lower(c.name) like lower(:search) ");
+			dynamicSql.append("and lower(c.name) like lower(:search) or lower(c.address) like lower(:search) or lower(c.contactNo) like lower(:search)" +
+					"or lower(c.email) like lower(:search) ");
 		}
 		
 		if(StringUtils.isNotEmpty(customer.getOrderBy())) {
@@ -421,7 +424,7 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		
 		//Generate sqlCount query
 		StringBuffer hqlQueryCount = new StringBuffer("select count(*) from Event e left join e.speakers inner join e.brand b where 1=1 ");
-		StringBuffer hqlQuery = new StringBuffer("from Event e left join fetch e.speakers inner join fetch e.brand where 1=1 ");
+		StringBuffer hqlQuery = new StringBuffer("from Event e left join fetch e.speakers inner join fetch e.brand b where 1=1 ");
 		
 		if(StringUtils.isNotEmpty(event.getName())) {
 			dynamicSql.append("and lower(e.name) like lower(:search) ");
@@ -483,7 +486,8 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		StringBuffer hqlQuery = new StringBuffer("from Brand b where 1=1 ");
 		
 		if(StringUtils.isNotEmpty(brand.getName())) {
-			dynamicSql.append("and ( lower(b.code) like lower(:search) or lower(b.name) like lower(:search) )");
+			dynamicSql.append("and ( lower(b.code) like lower(:search) or lower(b.name) like lower(:search)" +
+					" or lower(b.description) like lower(:search) )");
 		}
 		
 		if(StringUtils.isNotEmpty(brand.getOrderBy())) {
@@ -567,11 +571,11 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		StringBuffer dynamicSql = new StringBuffer();
 		
 		//Generate sqlCount query
-		StringBuffer hqlQueryCount = new StringBuffer("select count(*) from SolutionsCategory sc where 1=1 ");
-		StringBuffer hqlQuery = new StringBuffer("from SolutionsCategory sc where 1=1 ");
+		StringBuffer hqlQueryCount = new StringBuffer("select count(*) from SolutionsCategory sc inner join sc.solution s where 1=1 ");
+		StringBuffer hqlQuery = new StringBuffer("from SolutionsCategory sc inner join fetch sc.solution s where 1=1 ");
 		
 		if(StringUtils.isNotEmpty(category.getName())) {
-			dynamicSql.append("and ( lower(sc.name) like lower(:search) or lower(sc.description) like lower(:search) )");
+			dynamicSql.append("and ( lower(sc.name) like lower(:search) or lower(sc.description) like lower(:search) or lower(s.name) like lower(:search) )");
 		}
 		
 		if(StringUtils.isNotEmpty(category.getOrderBy())) {
@@ -650,7 +654,8 @@ public class MISDaoHibernate extends BaseDaoHibernate implements MISDao {
 		
 		if(StringUtils.isNotEmpty(consultant.getSearch())) {
 			dynamicSql.append("and ( lower(con.firstName) like lower(:search) or lower(con.middleName) like lower(:search) " +
-							  "or lower(con.lastName) like lower(:search) or lower(con.address) like lower(:search) ) ");
+							  "or lower(con.lastName) like lower(:search) or lower(con.address) like lower(:search) " +
+							  "or lower(con.contactNo) like lower(:search) or lower(con.email) like lower(:search) ) ");
 		}
 		
 		if(!InventoryUtility.isNull(consultant.getStatus())) {

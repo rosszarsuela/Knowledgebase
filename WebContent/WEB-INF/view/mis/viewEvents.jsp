@@ -58,64 +58,64 @@
 					<thead>
 						<tr>
 							<th>
-								<a href="<c:url value="/web/secured/admin/product/view">
+								<a href="<c:url value="/web/secured/admin/event/view">
 										<c:if test="${not empty eventCommand.name}">
 											<c:param name="search" value="${eventCommand.name}" />
 										</c:if>
 											<c:param name="begin" value="${page.currentPage}" />
-											<c:param name="orderBy" value="p.name"/>
+											<c:param name="orderBy" value="e.name"/>
 											<c:param name="sortBy" value="asc"/>
 									</c:url>" > <img src="<c:url value="/images/up.png"/>" height="10px" width="10px" title="Asc">
 								</a>
 								Name
-								<a href="<c:url value="/web/secured/admin/product/view">
+								<a href="<c:url value="/web/secured/admin/event/view">
 										<c:if test="${not empty eventCommand.name}">
 											<c:param name="search" value="${eventCommand.name}" />
 										</c:if>
 											<c:param name="begin" value="${page.currentPage}" />
-											<c:param name="orderBy" value="p.name"/>
+											<c:param name="orderBy" value="e.name"/>
 											<c:param name="sortBy" value="desc"/>
 									</c:url>" > <img src="<c:url value="/images/down.png"/>" height="10px" width="10px" title="Desc">
 								</a>
 							</th>
 							<th>
-								<a href="<c:url value="/web/secured/admin/product/view">
+								<a href="<c:url value="/web/secured/admin/event/view">
 										<c:if test="${not empty eventCommand.name}">
 											<c:param name="search" value="${eventCommand.name}" />
 										</c:if>
 											<c:param name="begin" value="${page.currentPage}" />
-											<c:param name="orderBy" value="p.description"/>
+											<c:param name="orderBy" value="e.description"/>
 											<c:param name="sortBy" value="asc"/>
 									</c:url>" > <img src="<c:url value="/images/up.png"/>" height="10px" width="10px" title="Asc">
 								</a>
 								Description
-								<a href="<c:url value="/web/secured/admin/product/view">
+								<a href="<c:url value="/web/secured/admin/event/view">
 										<c:if test="${not empty eventCommand.name}">
 											<c:param name="search" value="${eventCommand.name}" />
 										</c:if>
 											<c:param name="begin" value="${page.currentPage}" />
-											<c:param name="orderBy" value="p.description"/>
+											<c:param name="orderBy" value="e.description"/>
 											<c:param name="sortBy" value="desc"/>
 									</c:url>" > <img src="<c:url value="/images/down.png"/>" height="10px" width="10px" title="Desc">
 								</a>
 							</th>
 							<th>
-								<a href="<c:url value="/web/secured/admin/product/view">
+								<a href="<c:url value="/web/secured/admin/event/view">
 										<c:if test="${not empty eventCommand.name}">
 											<c:param name="search" value="${eventCommand.name}" />
 										</c:if>
 											<c:param name="begin" value="${page.currentPage}" />
-											<c:param name="orderBy" value="p.status"/>
+											<c:param name="orderBy" value="e.status"/>
 											<c:param name="sortBy" value="asc"/>
 									</c:url>" > <img src="<c:url value="/images/up.png"/>" height="10px" width="10px" title="Asc">
 								</a>
 								Status
-								<a href="<c:url value="/web/secured/admin/product/view">
+								<a href="<c:url value="/web/secured/admin/event/view">
 										<c:if test="${not empty eventCommand.name}">
 											<c:param name="search" value="${eventCommand.name}" />
 										</c:if>
 											<c:param name="begin" value="${page.currentPage}" />
-											<c:param name="orderBy" value="p.status"/>
+											<c:param name="orderBy" value="e.status"/>
 											<c:param name="sortBy" value="desc"/>
 									</c:url>" > <img src="<c:url value="/images/down.png"/>" height="10px" width="10px" title="Desc">
 								</a>
@@ -162,7 +162,7 @@
 				<c:if test="${not empty page.content}"><div>${page.currentPage}&nbsp;&nbsp;&nbsp;of&nbsp;&nbsp;&nbsp;${page.totalPages}</div></c:if>
 				<div style="display: inline;">
 					<c:if test="${page.currentPage gt 1}">
-						<a href="<c:url value="/web/secured/admin/product/view">
+						<a href="<c:url value="/web/secured/admin/event/view">
 							<c:if test="${not empty eventCommand.name}">
 								<c:param name="search" value="${eventCommand.name}" />
 							</c:if>
@@ -171,7 +171,7 @@
 								<c:param name="sortBy" value="${sortBy}"/>										    							
 							</c:url>">First&nbsp;
 						</a>
-						<a href="<c:url value="/web/secured/admin/product/view">
+						<a href="<c:url value="/web/secured/admin/event/view">
 								<c:if test="${not empty eventCommand.name}">
 									<c:param name="search" value="${eventCommand.name}" />
 								</c:if>
@@ -186,7 +186,7 @@
 				</div>
 				<div style="display: inline;">
 					<c:if test="${page.currentPage lt page.totalPages}">
-						<a href="<c:url value="/web/secured/admin/product/view">
+						<a href="<c:url value="/web/secured/admin/event/view">
 								<c:if test="${not empty eventCommand.name}">
 									<c:param name="search" value="${eventCommand.name}" />
 								</c:if>
@@ -196,7 +196,7 @@
 		  						</c:url>">
 							Next &gt;&gt;
 						</a>&nbsp;
-						<a href="<c:url value="/web/secured/admin/product/view">
+						<a href="<c:url value="/web/secured/admin/event/view">
 							<c:if test="${not empty eventCommand.name}">
 								<c:param name="search" value="${eventCommand.name}" />
 							</c:if>

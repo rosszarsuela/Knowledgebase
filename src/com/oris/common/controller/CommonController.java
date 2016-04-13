@@ -240,7 +240,7 @@ public class CommonController extends BaseController {
 		template = EventMailTemplate.newTemplate(email, obj);
 		mailService.sendMessage(template);
 		
-		response.sendRedirect(request.getContextPath() + VIEW_EVENT_REGISTRATION + "?id=" + participant.getEvent());
+		response.sendRedirect(request.getContextPath() + VIEW_EVENT_REGISTRATION + "?id=" + participant.getEvent().getId());
 	}
 	
 	@RequestMapping(value="/payment", method=RequestMethod.GET)

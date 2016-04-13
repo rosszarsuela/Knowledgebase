@@ -37,6 +37,7 @@ public class Event implements Serializable {
 	private String slot;
 	private CommonsMultipartFile image;
 	private String contentType;
+	private String eventContentPDF;
 	private byte[] picture;
 	private CommonsMultipartFile pdf;
 	private byte[] brochure;
@@ -150,7 +151,16 @@ public class Event implements Serializable {
 	
 	@Transient
 	public String getPdfContent() {
-		return "data:"+getContentType()+";base64," + Base64.encode(getBrochure());
+		return "data:"+getEventContentPDF()+";base64," + Base64.encode(getBrochure());
+	}
+	
+	@Column(name = "EVENT_PDF")
+	public String getEventContentPDF() {
+		return eventContentPDF;
+	}
+
+	public void setEventContentPDF(String eventContentPDF) {
+		this.eventContentPDF = eventContentPDF;
 	}
 
 	public void setDateTo(Date dateTo) {

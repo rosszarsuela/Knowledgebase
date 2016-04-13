@@ -1,6 +1,6 @@
 <!-- Footer -->
 <div id="footer">
-	<div class="container">
+	<!-- <div class="container">
 		<div class="rowFooter">
 			
 			<section class="col-lg-3 links1">
@@ -72,14 +72,14 @@
 			</form>
 		</section>
 	</div>
- </div>
+ </div> -->
 
 <!-- Icons -->
 	<ul class="icons">
-		<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span>
+		<!-- <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span>
 		</a>
-		</li>
-		<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span>
+		</li> -->
+		<li><a href="<c:url value="https://www.facebook.com/OrisOralImplantSolutionsInc.Ph/"/>" class="icon fa-facebook"><span class="label">Facebook</span>
 		</a>
 		</li>
 		<!--<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
@@ -90,7 +90,7 @@
 <!-- Copyright -->
 	<div class="copyright">
 		<ul class="menu">
-			<li>&copy; Untitled. All rights reserved</li>
+			<li>&copy; Oris Oral Implant Solutions, Inc. All rights reserved 2016</li>
 		</ul>
 	</div>
 </div>

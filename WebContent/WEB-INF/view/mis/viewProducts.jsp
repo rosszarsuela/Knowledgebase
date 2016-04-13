@@ -202,62 +202,66 @@
 					</tbody>
 				</table>
 			
-				<div align="left" style="padding-top: 0px; margin-left: 0px;">
-					<c:if test="${not empty page.content}"><div>${page.currentPage}&nbsp;&nbsp;&nbsp;of&nbsp;&nbsp;&nbsp;${page.totalPages}</div></c:if>
-					<div style="display: inline;">
-						<c:if test="${page.currentPage gt 1}">
-							<a href="<c:url value="/web/secured/admin/product/view">
+			Count
+			
+			
+			<div align="left" style="padding-top: 0px; margin-left: 0px;">
+				<c:if test="${not empty page.content}"><div>${page.currentPage}&nbsp;&nbsp;&nbsp;of&nbsp;&nbsp;&nbsp;${page.totalPages}</div></c:if>
+				<div style="display: inline;">
+					<c:if test="${page.currentPage gt 1}">
+						<a href="<c:url value="/web/secured/admin/product/view">
+							<c:if test="${not empty productCommand.name}">
+								<c:param name="search" value="${eventCommand.name}" />
+							</c:if>
+								<c:param name="begin" value="1" />
+								<c:param name="orderBy" value="${orderBy}"/>
+								<c:param name="sortBy" value="${sortBy}"/>										    							
+							</c:url>">First&nbsp;
+						</a>
+						<a href="<c:url value="/web/secured/admin/product/view">
 								<c:if test="${not empty productCommand.name}">
 									<c:param name="search" value="${productCommand.name}" />
 								</c:if>
-									<c:param name="begin" value="1" />
-									<c:param name="orderBy" value="${orderBy}"/>
-									<c:param name="sortBy" value="${sortBy}"/>										    							
-								</c:url>">First&nbsp;
-							</a>
-							<a href="<c:url value="/web/secured/admin/product/view">
-									<c:if test="${not empty productCommand.name}">
-										<c:param name="search" value="${productCommand.name}" />
-									</c:if>
-			  							<c:param name="begin" value="${page.currentPage - 1}" />
-			  							<c:param name="orderBy" value="${orderBy}"/>
-			  							<c:param name="sortBy" value="${sortBy}"/>										    							
-			  						</c:url>">
-								&lt;&lt; Previous
-							</a>
-							&nbsp;
-						</c:if>
-					</div>
-					<div style="display: inline;">
-						<c:if test="${page.currentPage lt page.totalPages}">
-							<a href="<c:url value="/web/secured/admin/product/view">
-									<c:if test="${not empty productCommand.name}">
-										<c:param name="search" value="${productCommand.name}" />
-									</c:if>
-			  							<c:param name="begin" value="${page.currentPage + 1}" />
-			  							<c:param name="orderBy" value="${orderBy}"/>
-			  							<c:param name="sortBy" value="${sortBy}"/>										    							
-			  						</c:url>">
-								Next &gt;&gt;
-							</a>&nbsp;
-							<a href="<c:url value="/web/secured/admin/product/view">
-								<c:if test="${not empty productCommand.name}">
-									<c:param name="search" value="${productCommand.name}" />
-								</c:if>
-									<c:param name="begin" value="${page.totalPages}" />
-									<c:param name="orderBy" value="${orderBy}"/>
-									<c:param name="sortBy" value="${sortBy}"/>										    							
-								</c:url>">
-								Last
-							</a>&nbsp;
-						</c:if>
-					</div>
-					<div>
-						<c:if test="${page.totalRecords gt 0}">
-							<div>Total Records: <c:out value="${page.totalRecords}"></c:out></div>
-						</c:if>		
-					</div>
+		  							<c:param name="begin" value="${page.currentPage - 1}" />
+		  							<c:param name="orderBy" value="${orderBy}"/>
+		  							<c:param name="sortBy" value="${sortBy}"/>										    							
+		  						</c:url>">
+							&lt;&lt; Previous
+						</a>
+						&nbsp;
+					</c:if>
 				</div>
+				<div style="display: inline;">
+					<c:if test="${page.currentPage lt page.totalPages}">
+						<a href="<c:url value="/web/secured/admin/product/view">
+								<c:if test="${not empty productCommand.name}">
+									<c:param name="search" value="${productCommand.name}" />
+								</c:if>
+		  							<c:param name="begin" value="${page.currentPage + 1}" />
+		  							<c:param name="orderBy" value="${orderBy}"/>
+		  							<c:param name="sortBy" value="${sortBy}"/>										    							
+		  						</c:url>">
+							Next &gt;&gt;
+						</a>&nbsp;
+						<a href="<c:url value="/web/secured/admin/product/view">
+							<c:if test="${not empty productCommand.name}">
+								<c:param name="search" value="${productCommand.name}" />
+							</c:if>
+								<c:param name="begin" value="${page.totalPages}" />
+								<c:param name="orderBy" value="${orderBy}"/>
+								<c:param name="sortBy" value="${sortBy}"/>										    							
+							</c:url>">
+							Last
+						</a>&nbsp;
+					</c:if>
+				</div>
+				<%-- <div>
+					<c:if test="${page.totalRecords gt 0}">
+						<div>Total Records: <c:out value="${page.totalRecords}"></c:out></div>
+					</c:if>		
+				</div> --%>
+			</div>
+			
 			</div>
 		</div>
 	</div>

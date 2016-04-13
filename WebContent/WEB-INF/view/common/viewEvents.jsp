@@ -76,7 +76,7 @@
 								<div class="event-page-desc">
 								<h3>${obj.description}</h3>
 								</div>
-								<c:if test="${not empty obj.brochure}">
+								<c:if test="${not empty obj.eventContentPDF}">
 							 	<a class="button" href="<c:url value="/web/view/downloadPdf">
 			   							 <c:param name="id" value="${obj.id}"/>
 				   						 </c:url>">Download PDF File<%-- <img src="<c:url value="/images/icon/pdf.png"/>" height="60px" width="60px"> --%>

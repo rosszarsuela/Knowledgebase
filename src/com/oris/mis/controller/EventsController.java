@@ -65,7 +65,7 @@ public class EventsController extends BaseController {
 			fis.read(bFile);
 			fis.close();
 			
-			event.setContentType(event.getPdf().getContentType());
+			event.setEventContentPDF((event.getPdf().getContentType()));
 			event.setBrochure(bFile);
 		}
 		
@@ -94,15 +94,10 @@ public class EventsController extends BaseController {
 		
 		event.setSpeakers((List<Speaker>)misService.getAllByHashMap(Speaker.class, map));
 		
-		model.addAttribute("brandList", getBrands());
+		model.addAttribute("brandsList", getBrands());
 		model.addAttribute("status", initStatus());
 		model.addAttribute("eventCommand", event);
 		return ADD_EDIT_EVENT;
-	}
-	
-	@SuppressWarnings("unchecked")
-	private List<Brand> getBrands() {
-		return (List<Brand>) misService.getAll(Brand.class, "name");
 	}
 	
 	@RequestMapping(value="/view")
@@ -132,5 +127,10 @@ public class EventsController extends BaseController {
 		model.addAttribute("brandsList", getBrands());
 		model.addAttribute("status", initStatus());
 		return ADD_EDIT_EVENT;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<Brand> getBrands() {
+		return (List<Brand>) misService.getAll(Brand.class, "name");
 	}
 }

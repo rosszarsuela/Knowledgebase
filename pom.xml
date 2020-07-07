@@ -46,9 +46,9 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.3.0</version>
 				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<!-- <failOnMissingWebXml>false</failOnMissingWebXml> -->
 					<warName>apollomedicus.war</warName>
-					<attachClasses>true</attachClasses>
+					<!-- <attachClasses>true</attachClasses> -->
 				</configuration>
 			</plugin>
 		</plugins>

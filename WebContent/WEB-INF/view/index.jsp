@@ -1,2 +1,2 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-404 not found.
+<img src="<c:url value="/images/ndc_logo.png"/>" alt="logo" />

@@ -45,10 +45,15 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.3.0</version>
 				<configuration>
-					<!-- <failOnMissingWebXml>false</failOnMissingWebXml> -->
+					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<warName>apollomedicus.war</warName>
-					<!-- <attachClasses>true</attachClasses> -->
+					<attachClasses>true</attachClasses>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>1.0.3</version>
 			</plugin>
 		</plugins>
 	</build>
